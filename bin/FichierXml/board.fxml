@@ -18,7 +18,7 @@
         <content>
           <AnchorPane fx:id="boardPanScrol" minHeight="0.0" minWidth="0.0" prefHeight="695.0" prefWidth="635.0">
                <children>
-                  <GridPane fx:id="boarad" gridLinesVisible="true" layoutX="14.0" layoutY="14.0"   prefHeight="644.0" prefWidth="600.0">
+                  <GridPane fx:id="boarad" gridLinesVisible="true" layoutX="14.0" layoutY="14.0" prefHeight="644.0" prefWidth="600.0">
                      <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="0.0" percentWidth="0.0" prefWidth="0.0" />
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="0.0" percentWidth="0.0" prefWidth="0.0" />

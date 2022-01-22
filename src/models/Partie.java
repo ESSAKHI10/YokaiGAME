@@ -2,25 +2,25 @@ package models;
 
 import java.util.ArrayList;
 import java.util.List;
-public class PartieJeux {
+public class Partie {
 	public List<Players> players;
 	public int numberPlayer;
 	public YokaiplayingCard cards;
 	public static CardIndicePlaying cardsIndice;
 	public List<CardIndiceShowing> cardIndiceShowing;
     public boolean gameOver ;
-
-	public List<Players> getPlayers() {
-		return players;
-	}
-
-	public PartieJeux() {
+    
+	public Partie() {
 		super();
 		this.players = new ArrayList<Players>();
 		this.cards = new YokaiplayingCard();
 		this.cardsIndice = new CardIndicePlaying();
 		this.cardIndiceShowing = new ArrayList<CardIndiceShowing>();
 
+	}
+	
+	public List<Players> getPlayers() {
+		return players;
 	}
 
 	public CardIndicePlaying getCardsIndice() {

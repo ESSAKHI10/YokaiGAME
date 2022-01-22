@@ -29,7 +29,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import models.YokaiCart;
-import models.PartieJeux;
+import models.Partie;
 import models.Players;
 
 public class MyController implements Initializable {
@@ -120,7 +120,7 @@ public class MyController implements Initializable {
 	// public static List<YokaiCartShowing> cards = new
 	// ArrayList<YokaiCartShowing>();
 
-	public static PartieJeux partieJeux = new PartieJeux();
+	public static Partie partieJeux = new Partie();
 
 	@FXML
 	void showTheCarte(ActionEvent event) throws InterruptedException {
