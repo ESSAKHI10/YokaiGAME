@@ -1,0 +1,35 @@
+/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+.btn_str{
+	-fx-background-image:url("/images/dos_carte.jpg");
+	-fx-background-size: 125px 119px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+	  
+}
+
+.btn_str:hover{
+	     
+	 	-fx-rotate: 10;
+ 
+	  
+	   
+	  
+}
+.btn_exteds{
+	-fx-background-image:url("/images/icons/plus.png");
+	-fx-background-size: 80px 80px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+	  
+}
+
+.btn_dos_indice{
+	-fx-background-image:url("/images/dos_indice.jpg");
+	-fx-background-size: 200px 200px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+	  
+}
+.btn_playerChosig{
+	-fx-border-radius: 50px 50px 50px 50px;
+}
