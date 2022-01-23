@@ -144,7 +144,7 @@ public class MyController implements Initializable {
 				Thread t = new Thread(() -> {
 					try {
 						// wait 3 seconds
-						Thread.sleep(5000);
+						Thread.sleep(2000);
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
@@ -601,6 +601,8 @@ public class MyController implements Initializable {
 									.get(partieJeux.getCardsIndice().getCardindice().size() - 1).getCartIndice()
 							+ ".jpg");
 			ImageView view = new ImageView(img);
+			view.setFitHeight(200);
+			view.setFitWidth(200);
 			btn_carte_indice_reveald.setGraphic(view);
 
 			if (!partieJeux.CartIndiceReveled()) {
