@@ -2,7 +2,8 @@ package Controllers;
 
 import java.io.IOException;
 import java.net.URL;
-
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import javafx.application.Platform;
@@ -117,24 +118,22 @@ public class MyController implements Initializable {
 	int colomnBefore = 6;
 	int RowAfter = 13;
 	int RowBefore = 6;
- 
-	
-	
-	// counter to show 2 picture
+
+	// counter to show only 2 picture
 	int counter = 2;
+
 	public static PartieJeux partieJeux = new PartieJeux();
+	public static Button carteTomove = null;
 
 	@FXML
 	void showTheCarte(ActionEvent event) throws InterruptedException {
-		//afficher deux carte 
+		Button btn = (Button) event.getSource();
+		System.err.println(btn.getId());
+		// afficher deux carte
 		if (partieJeux.getEtape() == 3) {
-		
 
 			if (counter != 0) {
 				Image img = new Image("images/dos_carte.jpg");
-
-				Button btn = (Button) event.getSource();
-				System.err.println(btn.getId());
 
 				ImageView view = new ImageView(img);
 
@@ -152,7 +151,7 @@ public class MyController implements Initializable {
 					}
 
 					Platform.runLater(() -> {
-						 
+
 						view.setImage(img);
 						btn.setGraphic(view);
 
@@ -160,23 +159,24 @@ public class MyController implements Initializable {
 				});
 				t.setDaemon(true);
 				t.start();
-				counter --;
-			}else if (counter==0) {
-				partieJeux.NextStep();
-				counter = 2;
-				
+				// fin thread
+				counter--;
+				if (counter == 0) {
+					partieJeux.NextStep();
+					counter = 2;
+
+				}
 			}
-			
-			System.out.println("countet:"+counter);
-		}else {
-			System.out.println("not here "+partieJeux.getEtape());
+
+			System.out.println("cate has been showed  :" + counter);
+		} else if (partieJeux.getEtape() == 2) {
+			System.out.println("im here whatthe fuck ");
+			System.out.println(btn.getId());
+			carteTomove = btn;
+		} else {
+			System.out.println("Please shose an indice card ");
+			System.out.println("not here " + partieJeux.getEtape());
 		}
-	}
-
-	public void resizeTheBoard() {
-		boardPanScrol.setMinSize(boarad.getMaxWidth(), boarad.getMaxHeight());
-		boardPanScrol.setMaxSize(boarad.getMaxWidth(), boarad.getMaxHeight());
-
 	}
 
 	@FXML
@@ -421,8 +421,9 @@ public class MyController implements Initializable {
 	public static int xx = 0;
 
 	public void moveCard(Pane pane) {
+
 		boarad.getChildren().remove(pane);
-		boarad.getChildren().remove(position0_0);
+		boarad.getChildren().remove(carteTomove);
 		Pane pane2 = new Pane();
 
 		boarad.add(pane2, (int) partieJeux.getCards().getCards().get(0).getYokaiCart().getX(),
@@ -433,18 +434,55 @@ public class MyController implements Initializable {
 		partieJeux.getCards().getCards().get(0).getYokaiCart().setX(x);
 		partieJeux.getCards().getCards().get(0).getYokaiCart().setY(y);
 
-		boarad.add(position0_0, x, y);
+		boarad.add(carteTomove, x, y);
+		carteTomove = null;
+
 	}
 
-	public void pressed(MouseEvent event, Pane pan) {
-		y = boarad.getRowIndex(pan);
-		x = boarad.getColumnIndex(pan);
-		// deplacer une carte 
-		if (partieJeux.getEtape() == 2) {
-		moveCard(pan);
-		partieJeux.NextStep();
+	public boolean possibleToMove(int x, int y) {
+
+		if (getNodeByCoordinate(x, y + 1) || getNodeByCoordinate(x, y - 1) || getNodeByCoordinate(x + 1, y)
+				|| getNodeByCoordinate(x - 1, y)) {
+			System.out.println("case available to receive any card");
+			return true;
+		} else {
+			System.out.println("this case are not  available to receive any card");
+			return false;
 		}
 
+	}
+
+	boolean getNodeByCoordinate(Integer row, Integer column) {
+		for (Node node : boarad.getChildren()) {
+			if (boarad.getRowIndex(node) == row && boarad.getColumnIndex(node) == column) {
+				if (node instanceof Button) {
+					return true;
+				}
+
+			}
+		}
+		return false;
+	}
+
+	// pressed the destination position to move a card
+	public void pressed(MouseEvent event, Pane pan) {
+
+		y = boarad.getRowIndex(pan);
+		x = boarad.getColumnIndex(pan);
+
+		// deplacer une carte
+		if (partieJeux.getEtape() == 2) {
+			if (possibleToMove(x, y)) {
+				System.out.println("you clicked mee");
+				if (carteTomove != null) {
+					moveCard(pan);
+					partieJeux.NextStep();
+				} else {
+					System.out.println("Oops no cart has been chosen");
+				}
+
+			}
+		}
 	}
 
 	private void addPane(int colIndex, int rowIndex) {
@@ -464,9 +502,7 @@ public class MyController implements Initializable {
 			pane.setMaxSize(100, 100);
 			pane.setOnMousePressed(event -> pressed(event, pane));
 			boarad.add(pane, colIndex, rowIndex);
-
 		}
-
 	}
 
 	@Override
@@ -554,11 +590,11 @@ public class MyController implements Initializable {
 	@FXML
 	void ShowCartIndiceReveald(ActionEvent event) {
 		System.out.println(partieJeux.getPlayers().size());
-		//aficher une carte indice 
+		// aficher une carte indice
 		if (partieJeux.getEtape() == 1) {
-			
+
 			// partieJeux.setEtape();
-			
+
 			partieJeux.getCardsIndice().afficher();
 			Image img = new Image(
 					"/images/indice/"
@@ -571,16 +607,23 @@ public class MyController implements Initializable {
 			if (!partieJeux.CartIndiceReveled()) {
 				openNewWindowa("/FichierXml/gameOver.fxml");
 			}
-			
-			System.out.println("smeeeeeeee"+partieJeux.getEtape());
-			 partieJeux.NextStep();
+
+			System.out.println("smeeeeeeee" + partieJeux.getEtape());
+			partieJeux.NextStep();
+
 		} else {
-			System.out.println("sorru not now "+partieJeux.getEtape());
+			System.out.println("sorru not now " + partieJeux.getEtape());
 		}
 	}
 
 	@FXML
 	void Use_cart_indice(ActionEvent event) {
+
+	}
+
+	public void resizeTheBoard() {
+		boardPanScrol.setMinSize(boarad.getMaxWidth(), boarad.getMaxHeight());
+		boardPanScrol.setMaxSize(boarad.getMaxWidth(), boarad.getMaxHeight());
 
 	}
 }
