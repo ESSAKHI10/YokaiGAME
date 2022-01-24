@@ -32,4 +32,9 @@ public enum CarteIndice implements Carte {
 		return Nom;
 	}
 
+	public String getName() {
+		return name;
+	}
+	
+
 }

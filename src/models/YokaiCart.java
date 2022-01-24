@@ -5,6 +5,7 @@ public enum YokaiCart implements Carte {
 
 	String name;
 	int number;
+	private boolean hasIndice;
 	private int y;
 
 	private int x;
@@ -28,6 +29,15 @@ public enum YokaiCart implements Carte {
 	private YokaiCart(String name, int number) {
 		this.name = name;
 		this.number = number;
+		this.hasIndice=false;
+	}
+
+	public boolean isHasIndice() {
+		return hasIndice;
+	}
+
+	public void setHasIndice(boolean hasIndice) {
+		this.hasIndice = hasIndice;
 	}
 
 	public String getName() {

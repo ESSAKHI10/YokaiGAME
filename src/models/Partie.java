@@ -2,29 +2,49 @@ package models;
 
 import java.util.ArrayList;
 import java.util.List;
-public class Partie {
+public final class Partie {
+	private static Partie partieJeux  ;
+	
+	
 	public List<Players> players;
 	public int numberPlayer;
 	public YokaiplayingCard cards;
-	public static CardIndicePlaying cardsIndice;
+	public  CardIndicePlaying cardsIndice;
 	public List<CardIndiceShowing> cardIndiceShowing;
 	public int etape ;
     public boolean gameOver ;
     
-    
-	public List<Players> getPlayers() {
-		return players;
-	}
-
-	public Partie() {
+ 
+	private Partie() {
 		super();
 		this.players = new ArrayList<Players>();
 		this.cards = new YokaiplayingCard();
 		this.cardsIndice = new CardIndicePlaying();
 		this.cardIndiceShowing = new ArrayList<CardIndiceShowing>();
-		this.etape=3;
+		this.etape=1;
 
 	}
+
+	public static synchronized Partie getInstance() {
+		if(partieJeux == null) {
+			System.out.println("creations");
+			
+			return partieJeux= new Partie();
+		}
+		System.out.println("already exits");
+		return partieJeux;
+	}
+	
+	
+	public List<Players> getPlayers() {
+		return players;
+	}
+
+
+	
+
+	
+ 
 
 	public int getEtape() {
 		return etape;
@@ -80,13 +100,15 @@ public class Partie {
 	}
 	public void NextStep() {
 	 
-			this.setEtape(this.getEtape()-1);
-			System.out.println("next step --------" + getEtape());
-			if (this.getEtape()  == 0) {
-				this.setEtape(3);
-				System.out.println("next player---------------------------" + getEtape());
+		this.setEtape(this.getEtape()+1);
+		if (this.getEtape()  == 4) {
+			this.setEtape(1);
+			System.out.println("next player---------------------------" + getEtape());
+		
+		}
 			
-			}
+			System.out.println("next step --------" + getEtape());
+			
 	}
 
 

@@ -10,9 +10,6 @@ public class YokaiplayingCard {
 
 	public YokaiplayingCard() {
 		cards = new ArrayList<YokaiCartShowing>();
-		 
-         
-	 
 		for (YokaiCart card : YokaiCart.values()) {
 			 System.out.println("Creating card [" + card + "]   ");
 			 for (int i = 0; i < 4; i++) {

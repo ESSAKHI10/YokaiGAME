@@ -4,12 +4,122 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="143.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.MyController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="371.0" prefWidth="497.0" styleClass="backgroundColor1" stylesheets="@../application/application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.IDentifyPlayers">
    <children>
-      <Label layoutX="211.0" layoutY="31.0" prefHeight="17.0" prefWidth="179.0" text="player :" />
-      <Label fx:id="labelNomrePLayer" layoutX="273.0" layoutY="31.0" prefHeight="17.0" prefWidth="19.0" text="1" />
-      <TextField fx:id="textFieldPLayerName" layoutX="168.0" layoutY="62.0" prefHeight="38.0" prefWidth="211.0" />
-      <Button fx:id="btn_nextPlayer" layoutX="429.0" layoutY="69.0" mnemonicParsing="false" onAction="#nextPlayer" text="next" />
+      <Label layoutX="45.0" layoutY="215.0" prefHeight="22.0" prefWidth="66.0" text="player :">
+         <font>
+            <Font name="Bell MT" size="18.0" />
+         </font>
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.6973684430122375" green="0.30348441004753113" blue="0.30348441004753113" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.5600000023841858" green="0.2856000065803528" blue="0.5032774806022644" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </textFill></Label>
+      <TextField fx:id="textFieldPLayerName" layoutX="157.0" layoutY="206.0" prefHeight="39.0" prefWidth="224.0" />
+      <Label layoutX="139.0" layoutY="14.0" prefHeight="56.0" prefWidth="243.0" text="YOKAI GAME">
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.6973684430122375" green="0.30348441004753113" blue="0.30348441004753113" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.083576999604702" green="0.3684210479259491" blue="0.33044183254241943" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </textFill>
+         <font>
+            <Font name="Bernard MT Condensed" size="45.0" />
+         </font>
+      </Label>
+      <Label layoutX="180.0" layoutY="115.0" prefHeight="31.0" prefWidth="137.0" text="ARE YOU READY">
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.6973684430122375" green="0.30348441004753113" blue="0.30348441004753113" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.3197999894618988" green="0.7799999713897705" blue="0.3330431580543518" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </textFill>
+         <font>
+            <Font name="Bodoni MT" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="51.0" layoutY="146.0" prefHeight="31.0" prefWidth="419.0" text="TEST YOUR MEMORY AND YOUR TEAM WORK   CAPACITY">
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.6973684430122375" green="0.30348441004753113" blue="0.30348441004753113" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.3197999894618988" green="0.7799999713897705" blue="0.3330431580543518" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </textFill>
+         <font>
+            <Font name="Bodoni MT" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="labelNomrePLayer" layoutX="124.0" layoutY="215.0" prefHeight="22.0" prefWidth="26.0">
+         <font>
+            <Font name="Bell MT" size="18.0" />
+         </font>
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.6973684430122375" green="0.30348441004753113" blue="0.30348441004753113" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.5600000023841858" green="0.2856000065803528" blue="0.5032774806022644" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Label>
+      <Button fx:id="btn_nextPlayer" layoutX="186.0" layoutY="279.0" minHeight="16.0" minWidth="69.0" mnemonicParsing="false" onAction="#nextPlayer" prefHeight="45.0" prefWidth="150.0" styleClass="btn_play" stylesheets="@../application/application.css" text="ADD">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

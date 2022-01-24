@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="611.0" prefWidth="567.0" styleClass="screenPlay" stylesheets="@../application/application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.PlayController">
+   <children>
+      <Pane layoutX="-4.0" layoutY="-1.0" prefHeight="618.0" prefWidth="575.0" styleClass="backgroundColor" stylesheets="@../application/application.css">
+         <children>
+            <Button fx:id="play" layoutX="225.0" layoutY="470.0" minHeight="16.0" minWidth="69.0" mnemonicParsing="false" onAction="#play" prefHeight="45.0" prefWidth="150.0" styleClass="btn_play" stylesheets="@../application/application.css" text="PLAY">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+            <Button fx:id="btn_exite" layoutX="225.0" layoutY="537.0" minHeight="16.0" minWidth="69.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="150.0" styleClass="btn_play" stylesheets="@../application/application.css" text="EXIT">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+            <Rectangle fx:id="kitsuni" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="200.0" layoutX="47.0" layoutY="24.0" stroke="BLACK" strokeType="INSIDE" style="-fx-arc-height: 80; -fx-arc-width: 80;" width="200.0" />
+            <Rectangle fx:id="oni" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="200.0" layoutX="322.0" layoutY="24.0" stroke="BLACK" strokeType="INSIDE" style="-fx-arc-height: 80; -fx-arc-width: 80;" width="200.0" />
+            <Rectangle fx:id="rokurokubi" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="200.0" layoutX="47.0" layoutY="242.0" stroke="BLACK" strokeType="INSIDE" style="-fx-arc-height: 80; -fx-arc-width: 80;" width="200.0" />
+            <Rectangle fx:id="kappa" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="200.0" layoutX="322.0" layoutY="242.0" stroke="BLACK" strokeType="INSIDE" style="-fx-arc-height: 80; -fx-arc-width: 80;" width="200.0" />
+            <Label fx:id="label_choose_player" layoutX="175.0" layoutY="456.0" text="Choose plyers Number">
+               <textFill>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color red="1.0" green="0.46759259700775146" blue="0.645061731338501" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </LinearGradient>
+               </textFill>
+               <font>
+                  <Font name="Agency FB Bold" size="38.0" />
+               </font>
+            </Label>
+            <Button fx:id="twoPlayer" layoutX="98.0" layoutY="522.0" mnemonicParsing="false" onAction="#ShoseNumberPLayers" prefHeight="60.0" prefWidth="59.0" style="-fx-background-radius: 30 30 30 30;" styleClass="backgroundColor" stylesheets="@../application/application.css" text="2" textFill="WHITE">
+               <font>
+                  <Font name="Baskerville Old Face" size="27.0" />
+               </font>
+            </Button>
+            <Button fx:id="threePlayer" layoutX="258.0" layoutY="522.0" mnemonicParsing="false" onAction="#ShoseNumberPLayers" prefHeight="60.0" prefWidth="59.0" style="-fx-background-radius: 30 30 30 30;" styleClass="backgroundColor" stylesheets="@../application/application.css" text="3" textFill="WHITE">
+               <font>
+                  <Font name="Baskerville Old Face" size="27.0" />
+               </font>
+            </Button>
+            <Button fx:id="foorlayer1" layoutX="410.0" layoutY="522.0" mnemonicParsing="false" onAction="#ShoseNumberPLayers" prefHeight="60.0" prefWidth="59.0" style="-fx-background-radius: 30 30 30 30;" styleClass="backgroundColor" text="4" textFill="WHITE">
+               <font>
+                  <Font name="Baskerville Old Face" size="27.0" />
+               </font>
+            </Button>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
