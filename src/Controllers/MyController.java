@@ -186,7 +186,7 @@ public class MyController implements Initializable {
 			// la carte à déplacer est le bouton qui a reçu l'event click
 			carteTomove = btn;
 		} else if(partieJeux.getCards().getCards().get(idBtn).getYokaiCart().isHasIndice()){
-			System.out.println("taaaaaaaaaaaaaaf indice");
+			System.out.println(partieJeux.getCards().getCards().get(idBtn).getYokaiCart().getName()+" taaaaaaaaaaaaaaf indice");
 		}else{
 			System.out.println("tu vas mettre "+carteIndiceDispo.getName());
 			placerIndiceSurCarte(btn);
