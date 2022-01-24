@@ -32,5 +32,10 @@
             <Font name="Baskerville Old Face" size="27.0" />
          </font>
       </Button>
+      <Button fx:id="foorlayer1" layoutX="426.0" layoutY="369.0" mnemonicParsing="false" onAction="#ShoseNumberPLayers" prefHeight="60.0" prefWidth="59.0" style="-fx-background-radius: 30 30 30 30; -fx-background-color: #079163;" text="4" textFill="WHITE">
+         <font>
+            <Font name="Baskerville Old Face" size="27.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

@@ -127,6 +127,8 @@ public class MyController implements Initializable {
 	int colomnBefore = 6;
 	int RowAfter = 13;
 	int RowBefore = 6;
+	
+	int colomn = 6;
 
 	// counter to show only 2 picture
 	int counter = 2;
@@ -268,21 +270,22 @@ public class MyController implements Initializable {
 	public void extend(int index, String ROW_COLOMN) {
 		if (ROW_COLOMN == "col") {
 
-			boarad.getColumnConstraints().get(index).setMinWidth(colomnSizeBoard);
-			boarad.getColumnConstraints().get(index).setMaxWidth(colomnSizeBoard);
+			boarad.getColumnConstraints().get(index).setMinWidth(10);
+			boarad.getColumnConstraints().get(index).setMaxWidth(100);
 			boarad.getColumnConstraints().get(index).setPercentWidth(-1);
 			boarad.getColumnConstraints().get(index).setPrefWidth(100);;
 			 
-			minBoard = minBoard + colomnSizeBoard;
+			minBoard = minBoard + 100;
 			boarad.setMinWidth(minBoard);
 		 
-			boarad.setMaxHeight(minBoard);
+			boarad.setMaxWidth(minBoard);
 		} else if (ROW_COLOMN == "row") {
-			boarad.getRowConstraints().get(index).setMinHeight(colomnSizeBoard);
-			boarad.getRowConstraints().get(index).setMaxHeight(colomnSizeBoard);
+			boarad.getRowConstraints().get(index).setMinHeight(10);
+			boarad.getRowConstraints().get(index).setMaxHeight(100);
+			boarad.getRowConstraints().get(index).setPrefHeight(30);
 			boarad.getRowConstraints().get(index).setPercentHeight(-1);
 			System.out.println("row");
-			minBoardRowAdd = minBoardRowAdd + RowSizeBoard;
+			minBoardRowAdd = minBoardRowAdd + 100;
 			boarad.setMinHeight(minBoardRowAdd);
 			// boarad.setMinWidth(minBoard);
 			boarad.setMaxHeight(minBoardRowAdd);
@@ -312,17 +315,12 @@ public class MyController implements Initializable {
 
 //additional method to work on //moving a card with  dragging
 	public void dragged(MouseEvent event, YokaiCart p) {
-		/*
-		 * System.out.println("dragged!!"); p.setX(p.getX() + event.getX());
-		 * p.setY(p.getY() + event.getY()); System.out.println(p.getX());
-		 * System.out.println(p.getY());
-		 */
-		// buttonExtendRowTop.setTranslateX(p.getX());
-		// buttonExtendRowTop.setTranslateX(p.getY());
+	 
 
 	}
 
 	public int getbtnId(Button btn) {
+
 		int card_index = -8;
 		switch (btn.getId()) {
 
@@ -510,6 +508,7 @@ public class MyController implements Initializable {
 
 	public void moveCard(Pane pane) {
 
+        
 		boarad.getChildren().remove(pane);
 		boarad.getChildren().remove(carteTomove);
 		Pane pane2 = new Pane();
@@ -590,17 +589,18 @@ public class MyController implements Initializable {
 			System.out.println(colIndex + " : " + rowIndex);
 		} else {
 			Pane pane = new Pane();
-			pane.setMinSize(100, 100);
-			pane.setMaxSize(100, 100);
+			pane.setMinSize(125, 125);
+			pane.setMaxSize(125, 125);
 			if (coloreSwitch) {
-				//pane.setStyle("-fx-background-color: #F0D9B5;");
+				pane.setStyle("-fx-background-color: #F0D9B5;");
 				coloreSwitch=false;
 				
 				
 				System.out.println("me");
 			} else {
 				//first
-				//pane.setStyle("-fx-background-color: #B58863;");
+				pane.setStyle("-fx-background-color: #B58863;");
+				//pane.setVisible(false);
 				coloreSwitch=true;
 				System.out.println("you");
 			}

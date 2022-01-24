@@ -15,95 +15,89 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="885.0" prefWidth="1268.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.MyController">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="906.0" prefWidth="1268.0" styleClass="backgroundBoard" stylesheets="@../application/application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.MyController">
    <children>
-      <Button fx:id="ButtonExtendRight" layoutX="1167.0" layoutY="173.0" mnemonicParsing="false" onAction="#ExtendRight" prefHeight="36.0" prefWidth="69.0" />
-      <Button fx:id="ButtonExtendLeft" layoutX="1029.0" layoutY="173.0" mnemonicParsing="false" onAction="#ExtendLEft" prefHeight="36.0" prefWidth="69.0" />
-      <Button fx:id="buttonExtendRowTop" layoutX="1098.0" layoutY="137.0" mnemonicParsing="false" onAction="#ExtendRowTop" prefHeight="36.0" prefWidth="69.0" styleClass="btn_exteds" stylesheets="@../application/application.css" />
-      <ScrollPane layoutX="29.0" layoutY="123.0" prefHeight="720.0" prefWidth="968.0">
-        <content>
-          <AnchorPane fx:id="boardPanScrol" minHeight="0.0" minWidth="0.0" prefHeight="709.0" prefWidth="969.0">
+      <ScrollPane layoutX="20.0" layoutY="130.0" prefHeight="727.0" prefWidth="968.0">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <content>
+            <AnchorPane prefHeight="1848.0" prefWidth="1735.0">
                <children>
-                  <GridPane fx:id="boarad" gridLinesVisible="true" layoutX="178.0" layoutY="39.0" prefHeight="644.0" prefWidth="600.0">
-                     <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="0.0" percentWidth="0.0" prefWidth="0.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="0.0" percentWidth="0.0" prefWidth="0.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="0.0" percentWidth="0.0" prefWidth="0.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="0.0" percentWidth="0.0" prefWidth="0.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="0.0" percentWidth="0.0" prefWidth="0.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="0.0" percentWidth="0.0" prefWidth="0.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="0.0" percentWidth="0.0" prefWidth="0.0" />
+                  <GridPane fx:id="boarad" gridLinesVisible="true" layoutX="-765.0" prefHeight="2500.0" prefWidth="2500.0">
+                    <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="0.0" percentWidth="0.0" prefWidth="0.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="0.0" percentWidth="0.0" prefWidth="0.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="0.0" percentWidth="0.0" prefWidth="0.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="0.0" percentWidth="0.0" prefWidth="0.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="0.0" percentWidth="0.0" prefWidth="0.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="0.0" minWidth="0.0" percentWidth="0.0" prefWidth="0.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="0.0" minWidth="0.0" percentWidth="0.0" prefWidth="0.0" />
-                     </columnConstraints>
-                     <rowConstraints>
-                        <RowConstraints minHeight="0.0" percentHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="0.0" percentHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="0.0" percentHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="0.0" percentHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="0.0" percentHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="0.0" percentHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="0.0" minHeight="0.0" percentHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="108.0" minHeight="10.0" prefHeight="108.0" vgrow="SOMETIMES" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="0.0" percentHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="0.0" percentHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="0.0" percentHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="0.0" percentHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="0.0" percentHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="0.0" percentHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="0.0" percentHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
-                     </rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
                      <children>
-                        <Button fx:id="position0_05" mnemonicParsing="false" onAction="#showTheCarte" prefHeight="119.0" prefWidth="125.0" styleClass="btn_str" stylesheets="@../application/application.css" GridPane.columnIndex="9" GridPane.rowIndex="9" GridPane.valignment="TOP" />
-                        <Button fx:id="position0_01" mnemonicParsing="false" onAction="#showTheCarte" prefHeight="119.0" prefWidth="125.0" styleClass="btn_str" stylesheets="@../application/application.css" GridPane.columnIndex="9" GridPane.rowIndex="8" />
-                        <Button fx:id="position0_02" mnemonicParsing="false" onAction="#showTheCarte" prefHeight="119.0" prefWidth="125.0" styleClass="btn_str" stylesheets="@../application/application.css" GridPane.columnIndex="10" GridPane.rowIndex="8" />
-                        <Button fx:id="position0_03" mnemonicParsing="false" onAction="#showTheCarte" prefHeight="119.0" prefWidth="125.0" styleClass="btn_str" stylesheets="@../application/application.css" GridPane.columnIndex="11" GridPane.rowIndex="8" />
-                        <Button fx:id="position0_04" mnemonicParsing="false" onAction="#showTheCarte" prefHeight="119.0" prefWidth="125.0" styleClass="btn_str" stylesheets="@../application/application.css" GridPane.columnIndex="8" GridPane.rowIndex="9" />
-                        <Button fx:id="position0_06" mnemonicParsing="false" onAction="#showTheCarte" prefHeight="119.0" prefWidth="125.0" styleClass="btn_str" stylesheets="@../application/application.css" GridPane.columnIndex="10" GridPane.rowIndex="9" />
-                        <Button fx:id="position0_07" mnemonicParsing="false" onAction="#showTheCarte" prefHeight="119.0" prefWidth="125.0" styleClass="btn_str" stylesheets="@../application/application.css" GridPane.columnIndex="11" GridPane.rowIndex="9" />
-                        <Button fx:id="position0_08" mnemonicParsing="false" onAction="#showTheCarte" prefHeight="119.0" prefWidth="125.0" styleClass="btn_str" stylesheets="@../application/application.css" GridPane.columnIndex="8" GridPane.rowIndex="10" />
-                        <Button fx:id="position0_012" mnemonicParsing="false" onAction="#showTheCarte" prefHeight="119.0" prefWidth="125.0" styleClass="btn_str" stylesheets="@../application/application.css" GridPane.columnIndex="8" GridPane.rowIndex="11" />
-                        <Button fx:id="position0_09" mnemonicParsing="false" onAction="#showTheCarte" prefHeight="119.0" prefWidth="125.0" styleClass="btn_str" stylesheets="@../application/application.css" GridPane.columnIndex="9" GridPane.rowIndex="10" />
-                        <Button fx:id="position0_013" mnemonicParsing="false" onAction="#showTheCarte" prefHeight="119.0" prefWidth="125.0" styleClass="btn_str" stylesheets="@../application/application.css" GridPane.columnIndex="9" GridPane.rowIndex="11" />
-                        <Button fx:id="position0_010" mnemonicParsing="false" onAction="#showTheCarte" prefHeight="119.0" prefWidth="125.0" styleClass="btn_str" stylesheets="@../application/application.css" GridPane.columnIndex="10" GridPane.rowIndex="10" />
-                        <Button fx:id="position0_014" mnemonicParsing="false" onAction="#showTheCarte" prefHeight="119.0" prefWidth="125.0" styleClass="btn_str" stylesheets="@../application/application.css" GridPane.columnIndex="10" GridPane.rowIndex="11" />
-                        <Button fx:id="position0_011" mnemonicParsing="false" onAction="#showTheCarte" prefHeight="119.0" prefWidth="125.0" styleClass="btn_str" stylesheets="@../application/application.css" GridPane.columnIndex="11" GridPane.rowIndex="10" />
-                        <Button fx:id="position0_015" mnemonicParsing="false" onAction="#showTheCarte" prefHeight="119.0" prefWidth="125.0" styleClass="btn_str" stylesheets="@../application/application.css" GridPane.columnIndex="11" GridPane.rowIndex="11" />
-                        <Button fx:id="position0_0" mnemonicParsing="false" onAction="#showTheCarte" prefHeight="119.0" prefWidth="125.0" styleClass="btn_str" stylesheets="@../application/application.css" GridPane.columnIndex="8" GridPane.rowIndex="8" />
+                        <Button fx:id="position0_0" mnemonicParsing="false" onAction="#showTheCarte" prefHeight="125.0" prefWidth="125.0" styleClass="btn_str" stylesheets="@../application/application.css" GridPane.columnIndex="8" GridPane.rowIndex="8" />
+                        <Button fx:id="position0_01" mnemonicParsing="false" onAction="#showTheCarte" prefHeight="125.0" prefWidth="125.0" styleClass="btn_str" stylesheets="@../application/application.css" GridPane.columnIndex="9" GridPane.rowIndex="8" />
+                        <Button fx:id="position0_02" mnemonicParsing="false" onAction="#showTheCarte" prefHeight="125.0" prefWidth="125.0" styleClass="btn_str" stylesheets="@../application/application.css" GridPane.columnIndex="10" GridPane.rowIndex="8" />
+                        <Button fx:id="position0_03" mnemonicParsing="false" onAction="#showTheCarte" prefHeight="125.0" prefWidth="125.0" styleClass="btn_str" stylesheets="@../application/application.css" GridPane.columnIndex="11" GridPane.rowIndex="8" />
+                        <Button fx:id="position0_04" mnemonicParsing="false" onAction="#showTheCarte" prefHeight="125.0" prefWidth="125.0" styleClass="btn_str" stylesheets="@../application/application.css" GridPane.columnIndex="8" GridPane.rowIndex="9" />
+                        <Button fx:id="position0_05" mnemonicParsing="false" onAction="#showTheCarte" prefHeight="125.0" prefWidth="125.0" styleClass="btn_str" stylesheets="@../application/application.css" GridPane.columnIndex="9" GridPane.rowIndex="9" />
+                        <Button fx:id="position0_06" mnemonicParsing="false" onAction="#showTheCarte" prefHeight="125.0" prefWidth="125.0" styleClass="btn_str" stylesheets="@../application/application.css" GridPane.columnIndex="10" GridPane.rowIndex="9" />
+                        <Button fx:id="position0_07" mnemonicParsing="false" onAction="#showTheCarte" prefHeight="125.0" prefWidth="125.0" styleClass="btn_str" stylesheets="@../application/application.css" GridPane.columnIndex="11" GridPane.rowIndex="9" />
+                        <Button fx:id="position0_08" mnemonicParsing="false" onAction="#showTheCarte" prefHeight="125.0" prefWidth="125.0" styleClass="btn_str" stylesheets="@../application/application.css" GridPane.columnIndex="8" GridPane.rowIndex="10" />
+                        <Button fx:id="position0_09" mnemonicParsing="false" onAction="#showTheCarte" prefHeight="125.0" prefWidth="125.0" styleClass="btn_str" stylesheets="@../application/application.css" GridPane.columnIndex="9" GridPane.rowIndex="10" />
+                        <Button fx:id="position0_010" mnemonicParsing="false" onAction="#showTheCarte" prefHeight="125.0" prefWidth="125.0" styleClass="btn_str" stylesheets="@../application/application.css" GridPane.columnIndex="10" GridPane.rowIndex="10" />
+                        <Button fx:id="position0_011" mnemonicParsing="false" onAction="#showTheCarte" prefHeight="125.0" prefWidth="125.0" styleClass="btn_str" stylesheets="@../application/application.css" GridPane.columnIndex="11" GridPane.rowIndex="10" />
+                        <Button fx:id="position0_012" mnemonicParsing="false" onAction="#showTheCarte" prefHeight="125.0" prefWidth="125.0" styleClass="btn_str" stylesheets="@../application/application.css" GridPane.columnIndex="8" GridPane.rowIndex="11" />
+                        <Button fx:id="position0_013" mnemonicParsing="false" onAction="#showTheCarte" prefHeight="125.0" prefWidth="125.0" styleClass="btn_str" stylesheets="@../application/application.css" GridPane.columnIndex="9" GridPane.rowIndex="11" />
+                        <Button fx:id="position0_014" mnemonicParsing="false" onAction="#showTheCarte" prefHeight="125.0" prefWidth="125.0" styleClass="btn_str" stylesheets="@../application/application.css" GridPane.columnIndex="10" GridPane.rowIndex="11" />
+                        <Button fx:id="position0_015" mnemonicParsing="false" onAction="#showTheCarte" prefHeight="125.0" prefWidth="125.0" styleClass="btn_str" stylesheets="@../application/application.css" GridPane.columnIndex="11" GridPane.rowIndex="11" />
                      </children>
                   </GridPane>
                </children>
             </AnchorPane>
-        </content>
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets>
+         </content>
       </ScrollPane>
-      <Pane layoutX="1089.0" layoutY="401.0" prefHeight="65.0" prefWidth="69.0" />
-      <Pane fx:id="carte_Indice_reveald" layoutX="1024.0" layoutY="474.0" prefHeight="200.0" prefWidth="200.0">
+      <Pane fx:id="carte_Indice_reveald" layoutX="1034.0" layoutY="439.0" prefHeight="200.0" prefWidth="200.0">
          <children>
-            <Button fx:id="btn_dos_indice" layoutX="92.0" layoutY="78.0" mnemonicParsing="false" onAction="#ShowCartIndiceReveald" prefHeight="65.0" prefWidth="69.0" styleClass="btn_dos_indice" stylesheets="@../application/application.css" />
+            <Button fx:id="btn_carte_indice_reveald" mnemonicParsing="false" onAction="#Use_cart_indice" prefHeight="200.0" prefWidth="200.0" styleClass="btn_dos_indice" stylesheets="@../application/application.css" />
          </children>
       </Pane>
-      <Button fx:id="ButtonExtendBottom" layoutX="1098.0" layoutY="209.0" mnemonicParsing="false" onAction="#ExtendBotton" prefHeight="36.0" prefWidth="69.0" />
-      <Button fx:id="btn_carte_indice_reveald" layoutX="1050.0" layoutY="633.0" mnemonicParsing="false" onAction="#Use_cart_indice" prefHeight="200.0" prefWidth="200.0" styleClass="btn_dos_indice" stylesheets="@../application/application.css" />
-      <Label layoutX="456.0" layoutY="14.0" prefHeight="56.0" prefWidth="243.0" text="YOKAI GAME">
+      <Label layoutX="359.0" layoutY="14.0" prefHeight="56.0" prefWidth="243.0" text="YOKAI GAME">
          <textFill>
             <LinearGradient endX="1.0" endY="1.0">
                <stops>
@@ -130,11 +124,12 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <Label layoutX="887.0" layoutY="92.0" prefHeight="17.0" prefWidth="69.0" text="TIME LINE">
+      <Label layoutX="893.0" layoutY="92.0" prefHeight="17.0" prefWidth="57.0" text="20:00:00">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <Pane fx:id="time_pan" layoutX="963.0" layoutY="83.0" prefHeight="36.0" prefWidth="34.0" styleClass="Timer" stylesheets="@../application/application.css" />
+      <Pane fx:id="time_pan" layoutX="954.0" layoutY="75.0" prefHeight="36.0" prefWidth="34.0" styleClass="Timer" stylesheets="@../application/application.css" />
+      <Button fx:id="btn_dos_indice" layoutX="1098.0" layoutY="343.0" mnemonicParsing="false" onAction="#ShowCartIndiceReveald" prefHeight="65.0" prefWidth="69.0" styleClass="btn_dos_indice" stylesheets="@../application/application.css" />
    </children>
 </AnchorPane>
