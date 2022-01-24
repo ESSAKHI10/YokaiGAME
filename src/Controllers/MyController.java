@@ -1,6 +1,7 @@
 package Controllers;
 
 import java.io.IOException;
+
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +31,8 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import models.YokaiCart;
-import models.PartieJeux;
+import models.Partie;
+ 
 import models.Players;
 
 public class MyController implements Initializable {
@@ -122,7 +124,7 @@ public class MyController implements Initializable {
 	// counter to show only 2 picture
 	int counter = 2;
 
-	public static PartieJeux partieJeux = new PartieJeux();
+	public static Partie partieJeux = new Partie();
 	public static Button carteTomove = null;
 
 	@FXML
