@@ -17,7 +17,7 @@ public class Partie {
 		this.cards = new YokaiplayingCard();
 		this.cardsIndice = new CardIndicePlaying();
 		this.cardIndiceShowing = new ArrayList<CardIndiceShowing>();
-		this.etape=3;
+		this.etape=1;
 
 	}
 	
@@ -79,13 +79,15 @@ public class Partie {
 	}
 	public void NextStep() {
 	 
-			this.setEtape(this.getEtape()-1);
-			System.out.println("next step --------" + getEtape());
-			if (this.getEtape()  == 0) {
-				this.setEtape(3);
-				System.out.println("next player---------------------------" + getEtape());
+		this.setEtape(this.getEtape()+1);
+		if (this.getEtape()  == 4) {
+			this.setEtape(1);
+			System.out.println("next player---------------------------" + getEtape());
+		
+		}
 			
-			}
+			System.out.println("next step --------" + getEtape());
+			
 	}
 
 

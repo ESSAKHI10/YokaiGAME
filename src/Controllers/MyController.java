@@ -30,6 +30,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import models.YokaiCart;
+import models.CarteIndice;
 import models.Partie;
 import models.Players;
 
@@ -102,6 +103,9 @@ public class MyController implements Initializable {
 	private Button ButtonExtendLeft;
 	@FXML
 	private AnchorPane boardPanScrol;
+	
+	@FXML
+    private Button btn_dos_indice;
 
 	@FXML
 	private Button ButtonExtendRight;
@@ -123,27 +127,36 @@ public class MyController implements Initializable {
 	int counter = 2;
 	public static Partie partieJeux = new Partie();
 	public static Button carteTomove = null;
+	public static CarteIndice carteIndiceDispo;
 
+	//cette méthode est appellée en cliquant sur une carte pour l'afficher
 	@FXML
 	void showTheCarte(ActionEvent event) throws InterruptedException {
+		
+		//identifier quel est le boutton concerné par le click
 		Button btn = (Button) event.getSource();
-		System.err.println(btn.getId());
-		// afficher deux carte
-		if (partieJeux.getEtape() == 3) {
+		int idBtn= getbtnId(btn);
+		// vérifier si on est dans la première étape ( celle de regarder deux cartes)
+		// le numero de cette étape est 1
+		if ((partieJeux.getEtape() == 1) && !partieJeux.getCards().getCards().get(idBtn).getYokaiCart().isHasIndice()) {
 
+			// la variable counter est initialisée a 2 lors de sa déclaration
+			// si le joueur regarde une carte on dicrémente le counter
+			// si le counter est égale à 0 cela veut dire que ke joueur a regardé les deux cartes
 			if (counter != 0) {
+				
 				Image img = new Image("images/dos_carte.jpg");
 
 				ImageView view = new ImageView(img);
 
-				view.setFitHeight(110);
-				view.setFitWidth(110);
+				view.setFitHeight(100);
+				view.setFitWidth(100);
 				setImage(btn, view);
 
-// this thread is to show the YOKAI card only for 5seconds
+				// cette Thread est pour afficher le Yokai pour une durée de 2 secondes
 				Thread t = new Thread(() -> {
 					try {
-						// wait 3 seconds
+						// wait 2 seconds
 						Thread.sleep(2000);
 					} catch (InterruptedException e) {
 						e.printStackTrace();
@@ -167,12 +180,16 @@ public class MyController implements Initializable {
 				}
 			}
 
-			System.out.println("cate has been showed  :" + counter);
+			System.out.println("card has been showed  :" + counter);
 		} else if (partieJeux.getEtape() == 2) {
-			System.out.println("im here whatthe fuck ");
-			System.out.println(btn.getId());
+			// là on est dans l'étape 2 donc le joueur va déplacer une carte
+			// la carte à déplacer est le bouton qui a reçu l'event click
 			carteTomove = btn;
-		} else {
+		} else if(partieJeux.getCards().getCards().get(idBtn).getYokaiCart().isHasIndice()){
+			System.out.println("taaaaaaaaaaaaaaf indice");
+		}else{
+			System.out.println("tu vas mettre "+carteIndiceDispo.getName());
+			placerIndiceSurCarte(btn);
 			System.out.println("Please shose an indice card ");
 			System.out.println("not here " + partieJeux.getEtape());
 		}
@@ -267,22 +284,25 @@ public class MyController implements Initializable {
 
 	}
 
-	public void cartAlreadyShonw(ImageView view, int index, Button btn) {
+	public void showCard(ImageView view, int index, Button btn) {
 
 		Image img;
-		if (!partieJeux.getCards().getCards().get(index).getShown()) {
+		if ((partieJeux.getEtape() == 1) && !partieJeux.getCards().getCards().get(index).getYokaiCart().isHasIndice()){
 			img = new Image(
 					"/images/yokaiImage/" + partieJeux.getCards().getCards().get(index).getYokaiCart() + ".jpg");
 			view.setImage(img);
 			btn.setGraphic(view);
 			partieJeux.getCards().getCards().get(index).showm();
 
-		} else {
-			System.out.println("sorry this card has been already revealed");
-			openNewWindowa("/FichierXml/CartHAsbeenRevealed.fxml");
+		} 
+		else {
+			System.out.println("sorry this card a deja un indice");
+			//openNewWindowa("/FichierXml/CartHAsbeenRevealed.fxml");
 		}
 
 	}
+	
+	
 
 //additional method to work on //moving a card with  dragging
 	public void dragged(MouseEvent event, YokaiCart p) {
@@ -295,6 +315,68 @@ public class MyController implements Initializable {
 		// buttonExtendRowTop.setTranslateX(p.getY());
 
 	}
+	public int getbtnId(Button btn) {
+		int card_index = -8;
+		switch (btn.getId()) {
+
+		case "position0_0":
+			card_index = 0;
+			break;
+
+		case "position0_01":
+			card_index = 1;
+			break;
+		case "position0_02":
+			card_index = 2;
+			break;
+		case "position0_03":
+			card_index = 4;
+			break;
+		case "position0_04":
+			card_index = 5;
+			break;
+
+		case "position0_05":
+			card_index = 5;
+			break;
+		case "position0_06":
+			card_index = 6;
+			break;
+		case "position0_07":
+			card_index = 7;
+			break;
+		case "position0_08":
+			card_index = 8;
+			break;
+		case "position0_09":
+			card_index = 9;
+			break;
+		case "position0_010":
+			card_index = 10;
+			break;
+		case "position0_011":
+			card_index = 11;
+			break;
+		case "position0_012":
+			card_index = 12;
+			break;
+		case "position0_013":
+			card_index = 13;
+			break;
+
+		case "position0_014":
+			card_index = 14;
+			break;
+		case "position0_015":
+			card_index = 15;
+			break;
+
+		default:
+			System.out.println("Choix incorrect");
+			break;
+		}
+		return card_index;
+	}
 
 	public int setImage(Button btn, ImageView view) throws InterruptedException {
 
@@ -305,7 +387,7 @@ public class MyController implements Initializable {
 		case "position0_0":
 			partieJeux.getCards().getCards().get(0).getYokaiCart().setX(8);
 			partieJeux.getCards().getCards().get(0).getYokaiCart().setY(8);
-			cartAlreadyShonw(view, 0, btn);
+			showCard(view, 0, btn);
 
 			card_index = 0;
 
@@ -315,95 +397,95 @@ public class MyController implements Initializable {
 
 			partieJeux.getCards().getCards().get(1).getYokaiCart().setX(8);
 			partieJeux.getCards().getCards().get(1).getYokaiCart().setY(9);
-			cartAlreadyShonw(view, 1, btn);
+			showCard(view, 1, btn);
 			card_index = 1;
 			break;
 		case "position0_02":
 
 			partieJeux.getCards().getCards().get(2).getYokaiCart().setX(8);
 			partieJeux.getCards().getCards().get(2).getYokaiCart().setY(10);
-			cartAlreadyShonw(view, 2, btn);
+			showCard(view, 2, btn);
 			card_index = 2;
 			break;
 		case "position0_03":
 
 			partieJeux.getCards().getCards().get(3).getYokaiCart().setX(8);
 			partieJeux.getCards().getCards().get(3).getYokaiCart().setY(11);
-			cartAlreadyShonw(view, 3, btn);
+			showCard(view, 3, btn);
 			card_index = 4;
 			break;
 		case "position0_04":
 			partieJeux.getCards().getCards().get(4).getYokaiCart().setX(9);
 			partieJeux.getCards().getCards().get(4).getYokaiCart().setY(8);
-			cartAlreadyShonw(view, 4, btn);
+			showCard(view, 4, btn);
 			card_index = 5;
 			break;
 
 		case "position0_05":
 			partieJeux.getCards().getCards().get(5).getYokaiCart().setX(9);
 			partieJeux.getCards().getCards().get(5).getYokaiCart().setY(9);
-			cartAlreadyShonw(view, 5, btn);
+			showCard(view, 5, btn);
 			card_index = 5;
 			break;
 		case "position0_06":
 			partieJeux.getCards().getCards().get(6).getYokaiCart().setX(9);
 			partieJeux.getCards().getCards().get(6).getYokaiCart().setY(10);
-			cartAlreadyShonw(view, 6, btn);
+			showCard(view, 6, btn);
 			card_index = 6;
 			break;
 		case "position0_07":
 			partieJeux.getCards().getCards().get(7).getYokaiCart().setX(9);
 			partieJeux.getCards().getCards().get(7).getYokaiCart().setY(11);
-			cartAlreadyShonw(view, 7, btn);
+			showCard(view, 7, btn);
 			card_index = 7;
 			break;
 		case "position0_08":
 			partieJeux.getCards().getCards().get(8).getYokaiCart().setX(10);
 			partieJeux.getCards().getCards().get(8).getYokaiCart().setY(8);
-			cartAlreadyShonw(view, 8, btn);
+			showCard(view, 8, btn);
 			card_index = 8;
 			break;
 		case "position0_09":
 			partieJeux.getCards().getCards().get(9).getYokaiCart().setX(10);
 			partieJeux.getCards().getCards().get(9).getYokaiCart().setY(9);
-			cartAlreadyShonw(view, 9, btn);
+			showCard(view, 9, btn);
 			card_index = 9;
 			break;
 		case "position0_010":
 			partieJeux.getCards().getCards().get(10).getYokaiCart().setX(10);
 			partieJeux.getCards().getCards().get(10).getYokaiCart().setY(10);
-			cartAlreadyShonw(view, 10, btn);
+			showCard(view, 10, btn);
 			card_index = 10;
 			break;
 		case "position0_011":
 			partieJeux.getCards().getCards().get(11).getYokaiCart().setX(10);
 			partieJeux.getCards().getCards().get(11).getYokaiCart().setY(11);
-			cartAlreadyShonw(view, 11, btn);
+			showCard(view, 11, btn);
 			card_index = 11;
 			break;
 		case "position0_012":
 			partieJeux.getCards().getCards().get(12).getYokaiCart().setX(11);
 			partieJeux.getCards().getCards().get(12).getYokaiCart().setY(8);
-			cartAlreadyShonw(view, 12, btn);
+			showCard(view, 12, btn);
 			card_index = 12;
 			break;
 		case "position0_013":
 			partieJeux.getCards().getCards().get(13).getYokaiCart().setX(11);
 			partieJeux.getCards().getCards().get(13).getYokaiCart().setY(9);
-			cartAlreadyShonw(view, 13, btn);
+			showCard(view, 13, btn);
 			card_index = 13;
 			break;
 
 		case "position0_014":
 			partieJeux.getCards().getCards().get(14).getYokaiCart().setX(11);
 			partieJeux.getCards().getCards().get(14).getYokaiCart().setY(10);
-			cartAlreadyShonw(view, 14, btn);
+			showCard(view, 14, btn);
 			card_index = 14;
 			break;
 		case "position0_015":
 			partieJeux.getCards().getCards().get(15).getYokaiCart().setX(11);
 			partieJeux.getCards().getCards().get(15).getYokaiCart().setY(11);
-			cartAlreadyShonw(view, 15, btn);
+			showCard(view, 15, btn);
 
 			card_index = 15;
 			break;
@@ -435,7 +517,7 @@ public class MyController implements Initializable {
 
 		boarad.add(carteTomove, x, y);
 		carteTomove = null;
-
+		btn_dos_indice.setDisable(false);
 	}
 
 	public boolean possibleToMove(int x, int y) {
@@ -507,8 +589,7 @@ public class MyController implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 
-		// TODO Auto-generated method stub
-
+		btn_dos_indice.setDisable(true);
 		for (int i = 0; i < boarad.getColumnCount(); i++) {
 			for (int j = 0; j < boarad.getRowCount(); j++) {
 
@@ -588,38 +669,101 @@ public class MyController implements Initializable {
 
 	@FXML
 	void ShowCartIndiceReveald(ActionEvent event) {
-		System.out.println(partieJeux.getPlayers().size());
-		// aficher une carte indice
-		if (partieJeux.getEtape() == 1) {
-
-			// partieJeux.setEtape();
-
+			carteIndiceDispo = partieJeux.getCardsIndice().getCardindice().get(partieJeux.getCardsIndice().getCardindice().size() - 1).getCartIndice();
+			
 			partieJeux.getCardsIndice().afficher();
-			Image img = new Image(
-					"/images/indice/"
-							+ partieJeux.getCardsIndice().getCardindice()
-									.get(partieJeux.getCardsIndice().getCardindice().size() - 1).getCartIndice()
-							+ ".jpg");
+			Image img = new Image("/images/indice/"+carteIndiceDispo+".jpg");
 			ImageView view = new ImageView(img);
 			view.setFitHeight(200);
 			view.setFitWidth(200);
 			btn_carte_indice_reveald.setGraphic(view);
-
 			if (!partieJeux.CartIndiceReveled()) {
 				openNewWindowa("/FichierXml/gameOver.fxml");
 			}
-
-			System.out.println("smeeeeeeee" + partieJeux.getEtape());
-			partieJeux.NextStep();
-
-		} else {
-			System.out.println("sorru not now " + partieJeux.getEtape());
-		}
+			btn_dos_indice.setDisable(true);
 	}
 
 	@FXML
 	void Use_cart_indice(ActionEvent event) {
+		//identifier quel est l'indice concerné par le click
+		System.out.println("----------"+carteIndiceDispo.getName());
+	}
+	
+	
+	public void placerIndiceSurCarte(Button btn) {
+		Image img = new Image("/images/indice/"+carteIndiceDispo+".jpg");
+		ImageView view = new ImageView(img);
+		view.setFitHeight(90);
+		view.setFitWidth(90);
+		btn.setGraphic(view);
+		
+		switch (btn.getId()) {
 
+		case "position0_0":
+			partieJeux.getCards().getCards().get(0).getYokaiCart().setHasIndice(true);
+			break;
+
+		case "position0_01":
+
+			partieJeux.getCards().getCards().get(1).getYokaiCart().setHasIndice(true);
+			break;
+		case "position0_02":
+
+			partieJeux.getCards().getCards().get(2).getYokaiCart().setHasIndice(true);
+			break;
+		case "position0_03":
+
+			partieJeux.getCards().getCards().get(3).getYokaiCart().setHasIndice(true);
+			break;
+		case "position0_04":
+			partieJeux.getCards().getCards().get(4).getYokaiCart().setHasIndice(true);
+			break;
+
+		case "position0_05":
+			partieJeux.getCards().getCards().get(5).getYokaiCart().setHasIndice(true);
+			break;
+		case "position0_06":
+			partieJeux.getCards().getCards().get(6).getYokaiCart().setHasIndice(true);
+			break;
+		case "position0_07":
+			partieJeux.getCards().getCards().get(7).getYokaiCart().setHasIndice(true);
+			break;
+		case "position0_08":
+			partieJeux.getCards().getCards().get(8).getYokaiCart().setHasIndice(true);
+			break;
+		case "position0_09":
+			partieJeux.getCards().getCards().get(9).getYokaiCart().setHasIndice(true);
+			break;
+		case "position0_010":
+			partieJeux.getCards().getCards().get(10).getYokaiCart().setHasIndice(true);
+			break;
+		case "position0_011":
+			partieJeux.getCards().getCards().get(11).getYokaiCart().setHasIndice(true);
+			break;
+		case "position0_012":
+			partieJeux.getCards().getCards().get(12).getYokaiCart().setHasIndice(true);
+			break;
+		case "position0_013":
+			partieJeux.getCards().getCards().get(13).getYokaiCart().setHasIndice(true);
+			break;
+
+		case "position0_014":
+			partieJeux.getCards().getCards().get(14).getYokaiCart().setHasIndice(true);
+			break;
+		case "position0_015":
+			partieJeux.getCards().getCards().get(15).getYokaiCart().setHasIndice(true);
+			break;
+
+		default:
+			System.out.println("Choix incorrect");
+			break;
+		}
+		Image img2 = new Image("/images/dos_indice.jpg");
+		ImageView view2 = new ImageView(img2);
+		view2.setFitHeight(200);
+		view2.setFitWidth(200);
+		btn_carte_indice_reveald.setGraphic(view2);
+		partieJeux.NextStep();
 	}
 
 	public void resizeTheBoard() {

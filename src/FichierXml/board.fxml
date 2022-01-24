@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -10,12 +11,12 @@
 
 <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1238.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.MyController">
    <children>
-      <Button fx:id="ButtonExtendRight" layoutX="867.0" layoutY="76.0" mnemonicParsing="false" onAction="#ExtendRight" prefHeight="52.0" prefWidth="69.0" />
-      <Button fx:id="ButtonExtendLeft" layoutX="729.0" layoutY="76.0" mnemonicParsing="false" onAction="#ExtendLEft" prefHeight="52.0" prefWidth="69.0" />
-      <Button fx:id="buttonExtendRowTop" layoutX="798.0" layoutY="22.0" mnemonicParsing="false" onAction="#ExtendRowTop" prefHeight="52.0" prefWidth="69.0" styleClass="btn_exteds" stylesheets="@../application/application.css" />
-      <ScrollPane layoutX="91.0" layoutY="-1.0" prefHeight="675.0" prefWidth="637.0">
+      <Button fx:id="ButtonExtendRight" layoutX="1155.0" layoutY="50.0" mnemonicParsing="false" onAction="#ExtendRight" prefHeight="36.0" prefWidth="69.0" />
+      <Button fx:id="ButtonExtendLeft" layoutX="1020.0" layoutY="50.0" mnemonicParsing="false" onAction="#ExtendLEft" prefHeight="36.0" prefWidth="69.0" />
+      <Button fx:id="buttonExtendRowTop" layoutX="1086.0" layoutY="14.0" mnemonicParsing="false" onAction="#ExtendRowTop" prefHeight="36.0" prefWidth="69.0" styleClass="btn_exteds" stylesheets="@../application/application.css" />
+      <ScrollPane layoutY="-1.0" prefHeight="675.0" prefWidth="992.0">
         <content>
-          <AnchorPane fx:id="boardPanScrol" minHeight="0.0" minWidth="0.0" prefHeight="695.0" prefWidth="635.0">
+          <AnchorPane fx:id="boardPanScrol" minHeight="0.0" minWidth="0.0" prefHeight="673.0" prefWidth="990.0">
                <children>
                   <GridPane fx:id="boarad" gridLinesVisible="true" layoutX="14.0" layoutY="14.0" prefHeight="644.0" prefWidth="600.0">
                      <columnConstraints>
@@ -84,17 +85,20 @@
                </children>
             </AnchorPane>
         </content>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
       </ScrollPane>
-      <Pane layoutX="992.0" layoutY="74.0" prefHeight="200.0" prefWidth="200.0">
+      <Pane layoutX="1089.0" layoutY="401.0" prefHeight="65.0" prefWidth="69.0">
          <children>
-            <Button fx:id="btn_dos_indice" layoutX="-1.0" mnemonicParsing="false" onAction="#ShowCartIndiceReveald" prefHeight="200.0" prefWidth="200.0" styleClass="btn_dos_indice" stylesheets="@../application/application.css" />
+            <Button fx:id="btn_dos_indice" mnemonicParsing="false" onAction="#ShowCartIndiceReveald" prefHeight="65.0" prefWidth="69.0" styleClass="btn_dos_indice" stylesheets="@../application/application.css" />
          </children>
       </Pane>
-      <Pane fx:id="carte_Indice_reveald" layoutX="992.0" layoutY="466.0" prefHeight="200.0" prefWidth="200.0">
+      <Pane fx:id="carte_Indice_reveald" layoutX="1024.0" layoutY="474.0" prefHeight="200.0" prefWidth="200.0">
          <children>
             <Button fx:id="btn_carte_indice_reveald" mnemonicParsing="false" onAction="#Use_cart_indice" prefHeight="200.0" prefWidth="200.0" styleClass="btn_dos_indice" stylesheets="@../application/application.css" />
          </children>
       </Pane>
-      <Button fx:id="ButtonExtendBottom" layoutX="798.0" layoutY="128.0" mnemonicParsing="false" onAction="#ExtendBotton" prefHeight="52.0" prefWidth="69.0" />
+      <Button fx:id="ButtonExtendBottom" layoutX="1089.0" layoutY="86.0" mnemonicParsing="false" onAction="#ExtendBotton" prefHeight="36.0" prefWidth="69.0" />
    </children>
 </AnchorPane>
