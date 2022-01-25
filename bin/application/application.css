@@ -1,7 +1,7 @@
 /* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
 .btn_str{
 	-fx-background-image:url("/images/dos_carte.jpg");
-	-fx-background-size: 125px 119px;
+	-fx-background-size: 125.0px 125px;
     -fx-background-repeat: no-repeat;
     -fx-background-position: center;
 	  
@@ -9,7 +9,7 @@
 
 .btn_str:hover{
 	     
-	 	-fx-rotate: 10;
+	 	-fx-rotate: 10.0;
  
 	  
 	   
@@ -17,7 +17,7 @@
 }
 .btn_exteds{
 	-fx-background-image:url("/images/icons/plus.png");
-	-fx-background-size: 80px 80px;
+	-fx-background-size: 80.0px 80.0px;
     -fx-background-repeat: no-repeat;
     -fx-background-position: center;
 	  
@@ -25,11 +25,79 @@
 
 .btn_dos_indice{
 	-fx-background-image:url("/images/dos_indice.jpg");
-	-fx-background-size: 200px 200px;
+	-fx-background-size: 200.0px 200.0px;
     -fx-background-repeat: no-repeat;
     -fx-background-position: center;
 	  
 }
 .btn_playerChosig{
-	-fx-border-radius: 50px 50px 50px 50px;
+	-fx-border-radius: 50.0px 50.0px 50.0px 50.0px;
+}
+.screen{
+	-fx-background-image:url("/images/yokaiScreen.png");
+	 
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
+.yokaicarte{
+-fx-background-image:url("/images/yokai.jpg");
+	-fx-background-repeat: no-repeat;
+    -fx-background-position: center
+}
+.btn_play{
+	-fx-font-weight:bold;
+	  -fx-background-color: linear-gradient(to right,#961254, #466d7a);
+	-fx-background-radius:22.0;
+	-fx-font-size :16.0;
+	-fx-text-fill:white;
+}
+
+.btn_play:hover{
+	-fx-font-weight:bold;
+	  -fx-background-color: linear-gradient(to right,#466d7a,#961254);
+	-fx-background-radius:22.0;
+	-fx-font-size :16.0;
+	-fx-text-fill:#2196f3;
+	 -fx-background-color: linear-gradient(to right,#466d7a,#961254);
+	-fx-border-radius:20.0;
+	-fx-border-width:3.0;
+	
+}
+.btn_play:pressed{
+	-fx-font-weight:bold;
+	-fx-backgrounf-color:#2196f3;
+	-fx-background-radius:22.0;
+	-fx-font-size :16.0;
+	-fx-text-fill:#2196f3;
+	-fx-border-color:#2196f3;
+	-fx-border-radius:20.0;
+	-fx-font-width:3.0;
+    	-fx-rotate:15.0;
+	
+ }
+ 
+.screenPlay{
+	-fx-background-image:url("/images/dos_carte.jpg");
+	-fx-background-size: 850.0px 850.0px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+	  
+}
+.backgroundColor{
+    -fx-background-color: linear-gradient(to right,#961254, #5fd8fa);
+}
+.backgroundColor1{
+    -fx-background-color: linear-gradient(to right,#94abb5, #5fd8fa);
+}
+.backgroundBoard
+{
+    -fx-background-color: linear-gradient(to right,#94abb5, #805962);
+}
+.Timer{
+    
+    	-fx-background-image:url("/images/icons/historical_40px.png");
+	-fx-background-size: 34px 36.0px;
+	    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+ 
 }

@@ -6,20 +6,23 @@ import java.util.List;
 import java.util.Random;
 
 public class YokaiplayingCard {
-	private static List<YokaiCartShowing> cards;
+	private List<YokaiCartShowing> cards;
 
 	public YokaiplayingCard() {
 		cards = new ArrayList<YokaiCartShowing>();
 		for (YokaiCart card : YokaiCart.values()) {
-			 System.out.println("Creating card [" + card + "]   ");
-			 for (int i = 0; i < 4; i++) {
-		     	System.out.println("  [" + card + "]    ");
-        	    cards.add(new YokaiCartShowing(card, false));
-			 
-		 }
-			 
+			System.out.println("Creating card [" + card.getName() + "]   ");
+			for (int i = 0; i < 4; i++) {
+				System.out.println("  [" + card + "]    ");
+				cards.add(new YokaiCartShowing(card, false));
+
+			}
+
 		}
-		 shuffle();
+		shuffle();
+		positon();
+		System.out.println("----------------");
+		afficher();
 	}
 
 	public void shuffle() {
@@ -29,16 +32,34 @@ public class YokaiplayingCard {
 		}
 	}
 
+	public void positon() {
+		int x = 8;
+		int y = 8;
+		for (int i = 0; i < 16; i++) {
+            coordinate cor =new coordinate(x,y);
+			this.cards.get(i).setCord(cor);
+			 
+
+			System.out.println(cards.get(i).getYokaiCart().getName() + " : " + cards.get(i).getCord().getX() + ","+ cards.get(i).getCord().getY());
+		 
+			y = y + 1;
+			if (y == 12) {
+				x++;
+				y = 8;
+			}
+
+		}
+	}
+
 	public List<YokaiCartShowing> getCards() {
 		return cards;
 	}
 
-	 
 	public void afficher() {
-		for (YokaiCartShowing c:cards)
-			System.out.println("YokaiplayingCard [ cards=" + c.getYokaiCart()+ "] " );
-		 
-	}
-	
 
+		for (YokaiCartShowing c : cards)
+			System.out.println(
+					c.getYokaiCart().getName() + " : " + c.getCord().getX() + "," + c.getCord().getY());
+
+	}
 }

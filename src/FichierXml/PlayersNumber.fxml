@@ -5,8 +5,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="449.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.MyController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="449.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ChooseNumbePlayer">
    <children>
       <Label layoutX="230.0" layoutY="14.0" prefHeight="43.0" prefWidth="215.0" text="Yokai Games" textFill="#c63636">
          <font>
@@ -29,6 +28,11 @@
          </font>
       </Button>
       <Button fx:id="foorlayer" layoutX="416.0" layoutY="359.0" mnemonicParsing="false" onAction="#ShoseNumberPLayers" prefHeight="60.0" prefWidth="59.0" style="-fx-background-radius: 30 30 30 30; -fx-background-color: #079163;" text="4" textFill="WHITE">
+         <font>
+            <Font name="Baskerville Old Face" size="27.0" />
+         </font>
+      </Button>
+      <Button fx:id="foorlayer1" layoutX="426.0" layoutY="369.0" mnemonicParsing="false" onAction="#ShoseNumberPLayers" prefHeight="60.0" prefWidth="59.0" style="-fx-background-radius: 30 30 30 30; -fx-background-color: #079163;" text="4" textFill="WHITE">
          <font>
             <Font name="Baskerville Old Face" size="27.0" />
          </font>
