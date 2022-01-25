@@ -697,67 +697,7 @@ public class MyController implements Initializable {
 		view.setFitWidth(90);
 		btn.setGraphic(view);
 		
-		switch (btn.getId()) {
-
-		case "position0_0":
-			partieJeux.getCards().getCards().get(0).getYokaiCart().setHasIndice(true);
-			break;
-
-		case "position0_01":
-
-			partieJeux.getCards().getCards().get(1).getYokaiCart().setHasIndice(true);
-			break;
-		case "position0_02":
-
-			partieJeux.getCards().getCards().get(2).getYokaiCart().setHasIndice(true);
-			break;
-		case "position0_03":
-
-			partieJeux.getCards().getCards().get(3).getYokaiCart().setHasIndice(true);
-			break;
-		case "position0_04":
-			partieJeux.getCards().getCards().get(4).getYokaiCart().setHasIndice(true);
-			break;
-
-		case "position0_05":
-			partieJeux.getCards().getCards().get(5).getYokaiCart().setHasIndice(true);
-			break;
-		case "position0_06":
-			partieJeux.getCards().getCards().get(6).getYokaiCart().setHasIndice(true);
-			break;
-		case "position0_07":
-			partieJeux.getCards().getCards().get(7).getYokaiCart().setHasIndice(true);
-			break;
-		case "position0_08":
-			partieJeux.getCards().getCards().get(8).getYokaiCart().setHasIndice(true);
-			break;
-		case "position0_09":
-			partieJeux.getCards().getCards().get(9).getYokaiCart().setHasIndice(true);
-			break;
-		case "position0_010":
-			partieJeux.getCards().getCards().get(10).getYokaiCart().setHasIndice(true);
-			break;
-		case "position0_011":
-			partieJeux.getCards().getCards().get(11).getYokaiCart().setHasIndice(true);
-			break;
-		case "position0_012":
-			partieJeux.getCards().getCards().get(12).getYokaiCart().setHasIndice(true);
-			break;
-		case "position0_013":
-			partieJeux.getCards().getCards().get(13).getYokaiCart().setHasIndice(true);
-			break;
-
-		case "position0_014":
-			partieJeux.getCards().getCards().get(14).getYokaiCart().setHasIndice(true);
-			break;
-		case "position0_015":
-			partieJeux.getCards().getCards().get(15).getYokaiCart().setHasIndice(true);
-			break;
-
-		default:
-			System.out.println("Choix incorrect");
-			break;
-		}
+		btn.setDisable(true);
 		Image img2 = new Image("/images/dos_indice.jpg");
 		ImageView view2 = new ImageView(img2);
 		view2.setFitHeight(200);
