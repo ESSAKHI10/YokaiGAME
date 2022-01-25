@@ -13,7 +13,7 @@ public class Main extends Application {
 		try {
 			
 			// ouvrir le fichier board.fxml
-		//	Parent root = FXMLLoader.load(getClass().getResource("/FichierXml/YokaiScreen.fxml"));
+			//Parent root = FXMLLoader.load(getClass().getResource("/FichierXml/YokaiScreen.fxml"));
 			
 			Parent root = FXMLLoader.load(getClass().getResource("/FichierXml/board.fxml"));
 			primaryStage.setTitle("Yokai Game");

@@ -2,14 +2,22 @@ package models;
 
 public class YokaiCartShowing {
 	private YokaiCart yokaiCart;
+	private coordinate cord;
 	private Boolean shown;
 	
 	
-	 //constructor
-	public YokaiCartShowing(YokaiCart yokaiCart, Boolean shown) {
+ 
+	public YokaiCartShowing(YokaiCart yokaiCart,   Boolean shown) {
 		super();
 		this.yokaiCart = yokaiCart;
+		 
 		this.shown = shown;
+	}
+	public coordinate getCord() {
+		return cord;
+	}
+	public void setCord(coordinate cord) {
+		this.cord = cord;
 	}
 	//getters setters
 	public YokaiCart getYokaiCart() {

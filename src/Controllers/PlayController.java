@@ -13,6 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
 import javafx.scene.paint.ImagePattern;
 
 public class PlayController implements Initializable {
@@ -41,7 +42,9 @@ public class PlayController implements Initializable {
 	@FXML
 	private Rectangle rokurokubi;
 	public openNewWindowa opneNEwWindows;
-	Partie partieJeux = Partie.getInstance();
+	
+ 
+	Partie partieJeux = Partie.getInstance( );
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {

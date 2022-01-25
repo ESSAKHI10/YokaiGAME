@@ -6,25 +6,9 @@ public enum YokaiCart implements Carte {
 	String name;
 	int number;
 	private boolean hasIndice;
-	private int y;
+ 
 
-	private int x;
-
-	public int getX() {
-		return x;
-	}
-
-	public void setX(int d) {
-		this.x = (int) d;
-	}
-
-	public double getY() {
-		return y;
-	}
-
-	public void setY(int d) {
-		this.y = d;
-	}
+	 
 
 	private YokaiCart(String name, int number) {
 		this.name = name;

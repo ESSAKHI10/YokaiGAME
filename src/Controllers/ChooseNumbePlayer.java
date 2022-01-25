@@ -7,6 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.layout.GridPane;
 import models.Partie;
 import models.openNewWindowa;
 
@@ -20,7 +21,9 @@ public class ChooseNumbePlayer implements Initializable {
 
     @FXML
     private Button twoPlayer;
-    Partie partieJeux = Partie.getInstance();
+    
+    
+    Partie partieJeux = Partie.getInstance( );
 	public openNewWindowa opneNEwWindows ;
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {

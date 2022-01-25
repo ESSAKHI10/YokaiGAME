@@ -10,6 +10,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
 import models.Partie;
 import models.Players;
 import models.openNewWindowa;
@@ -26,8 +27,8 @@ public class IDentifyPlayers implements Initializable {
     private TextField textFieldPLayerName;
 	public openNewWindowa opneNEwWindows ;
     public static int ki = 1;
-
-    Partie partieJeux = Partie.getInstance();
+   
+    Partie partieJeux = Partie.getInstance( );
      
 	@FXML
 	void nextPlayer(ActionEvent event) {
