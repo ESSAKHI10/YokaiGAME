@@ -8,7 +8,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
 public class Board {
-	public List<BoardCase> board = new ArrayList<BoardCase>();
+	public List<BoardCase> listeCase = new ArrayList<BoardCase>();
 	public boolean switchColor = false;
 
 	public Board() {
@@ -16,7 +16,7 @@ public class Board {
 	}
 
 	public BoardCase chercheCase(int row, int column) {
-		for (BoardCase casse : board) {
+		for (BoardCase casse : listeCase) {
 			if (casse.getX() == row && casse.getY() == column) {
 				return casse;
 			}
@@ -26,15 +26,12 @@ public class Board {
 	}
 
 	public void PreparBoard(GridPane boarad) {
-	//	System.out.println("from borad");
 		for (int i = 0; i < boarad.getColumnCount(); i++) {
 			switchColor = !switchColor;
 			for (int j = 0; j < boarad.getRowCount(); j++) {
-
 				addPane(i, j, boarad);
 			}
 		}
-
 	}
 
 	public void addPane(int colIndex, int rowIndex, GridPane boarad) {
@@ -50,62 +47,47 @@ public class Board {
 				|| (colIndex == 10 && rowIndex == 11) || (colIndex == 11 && rowIndex == 8)
 				|| (colIndex == 11 && rowIndex == 9) || (colIndex == 11 && rowIndex == 10)
 				|| (colIndex == 11 && rowIndex == 11)) {
-		//	System.out.println(colIndex + " : " + rowIndex);
-
 			casee.setY(colIndex);
 			casee.setX(rowIndex);
-			board.add(casee);
+			listeCase.add(casee);
 			if (switchColor) {
 				casee.setStyle("-fx-background-color: #F0D9B5;");
 				switchColor = !switchColor;
-
-				board.add(casee);
-			//	System.out.println("me");
+				listeCase.add(casee);
 			} else {
-				// first
 				casee.setStyle("-fx-background-color: #B58863;");
-				// pane.setVisible(false);
 				switchColor = !switchColor;
-				//System.out.println("you");
-				board.add(casee);
+				listeCase.add(casee);
 			}
 
 		} else {
-
 			if (switchColor) {
 				pane.setStyle("-fx-background-color: #F0D9B5;");
 				casee.setStyle("-fx-background-color: #F0D9B5;");
 				casee.setY(colIndex);
 				casee.setX(rowIndex);
 				switchColor = false;
-				board.add(casee);
-
+				listeCase.add(casee);
 			} else {
-
 				pane.setStyle("-fx-background-color: #B58863;");
 				casee.setStyle("-fx-background-color: #B58863;");
 				casee.setY(colIndex);
 				casee.setX(rowIndex);
 				switchColor = true;
-
-				board.add(casee);
+				listeCase.add(casee);
 			}
-
 			boarad.add(pane, colIndex, rowIndex);
-
 		}
 	}
 
-	public void addCase() {
-
+	public List<BoardCase> getListeCase() {
+		return listeCase;
 	}
 
-	public void setBoard(List<BoardCase> board) {
-		this.board = board;
+	public void setListeCase(List<BoardCase> listeCase) {
+		this.listeCase = listeCase;
 	}
 
-	public List<BoardCase> getBoard() {
-		return board;
-	}
+	
 
 }

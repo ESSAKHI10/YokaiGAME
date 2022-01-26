@@ -27,9 +27,8 @@ public class openNewWindowa {
 	}
 
 	public void open(String str) {
-		System.out.println("openening a new windows ");
 		info = new Stage();
-	    info.initStyle(StageStyle.UNDECORATED);
+	    //info.initStyle(StageStyle.UNDECORATED);
 		try {
 
 			fxml = FXMLLoader.load(getClass().getResource(str));

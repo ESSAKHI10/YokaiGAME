@@ -1,16 +1,12 @@
 package models;
 
-public class YokaiCartShowing {
+public class YokaiCardShowing {
 	private YokaiCart yokaiCart;
 	private coordinate cord;
 	private Boolean shown;
-	
-	
- 
-	public YokaiCartShowing(YokaiCart yokaiCart,   Boolean shown) {
+	public YokaiCardShowing(YokaiCart yokaiCart,   Boolean shown) {
 		super();
 		this.yokaiCart = yokaiCart;
-		 
 		this.shown = shown;
 	}
 	public coordinate getCord() {

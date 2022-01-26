@@ -13,11 +13,11 @@ public class Main extends Application {
 		try {
 			
 			// ouvrir le fichier board.fxml
-			//Parent root = FXMLLoader.load(getClass().getResource("/FichierXml/YokaiScreen.fxml"));
+			Parent root = FXMLLoader.load(getClass().getResource("/FichierXml/YokaiScreen.fxml"));
 			
-			Parent root = FXMLLoader.load(getClass().getResource("/FichierXml/board.fxml"));
+			//Parent root = FXMLLoader.load(getClass().getResource("/FichierXml/board.fxml"));
 			primaryStage.setTitle("Yokai Game");
-		//	primaryStage.initStyle(StageStyle.UNDECORATED);
+			//primaryStage.initStyle(StageStyle.UNDECORATED);
 			primaryStage.setScene(new Scene(root));
 			primaryStage.show();
 		} catch (Exception e) {

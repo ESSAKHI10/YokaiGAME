@@ -32,33 +32,23 @@ public class IDentifyPlayers implements Initializable {
      
 	@FXML
 	void nextPlayer(ActionEvent event) {
-		System.out.println("cliki");
 		Players p;
 		opneNEwWindows= new openNewWindowa(); 
-		System.out.println("ki = "+ki);
-		
 		labelNomrePLayer.setText("" + ki);
-		
-		System.out.println("nombre player : "+partieJeux.getNumberPlayer());
 		if (ki == partieJeux.getNumberPlayer()) {
-
-			
-
 			p = new Players(textFieldPLayerName.getText());
 			p.setName(textFieldPLayerName.getText());
 			partieJeux.addPlayer(p);
+			textFieldPLayerName.getScene().getWindow().hide();
 			opneNEwWindows.open("/FichierXml/board.fxml");
 			ki++;
 
 		} else {
 			ki++;
-
-		 
-
 			p = new Players(textFieldPLayerName.getText());
 			p.setName(textFieldPLayerName.getText());
 			partieJeux.addPlayer(p);
-
+			textFieldPLayerName.getScene().getWindow().hide();
 			opneNEwWindows.open("/FichierXml/playersName.fxml");
 			btn_nextPlayer.getScene().getWindow().hide();
 

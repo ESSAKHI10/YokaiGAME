@@ -1,43 +1,30 @@
 package Controllers;
 
-import java.io.IOException;
-
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
-
 import javafx.application.Platform;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Separator;
 import javafx.scene.control.TextField;
-
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
-import javafx.stage.Stage;
-
 import models.YokaiCart;
 import models.openNewWindowa;
 import models.Partie;
 import models.BoardCase;
 import models.CarteIndice;
-
-import models.Players;
 
 public class MyController implements Initializable {
 
@@ -95,8 +82,25 @@ public class MyController implements Initializable {
 
 	@FXML
 	private Button position0_08;
+	
+	@FXML
+    private Label txtPlayer1;
+
+    @FXML
+    private Label txtPlayer2;
+    
+    @FXML
+    private Separator sep1;
+    
+    @FXML
+    private Separator sep2;
+    
 	@FXML
 	private Circle cercel_player;
+	
+	@FXML
+	private Circle cercel_player1;
+	
 	@FXML
 	private Button position0_09;
 	@FXML
@@ -130,10 +134,12 @@ public class MyController implements Initializable {
 
 		Image img = new Image("/images/icons/badlion_100px.png");
 		cercel_player.setFill(new ImagePattern(img));
-
+		cercel_player1.setFill(new ImagePattern(img));
+		txtPlayer1.setText(partieJeux.getPlayers().get(0).getName());
+		txtPlayer2.setText(partieJeux.getPlayers().get(1).getName());
 		btn_dos_indice.setDisable(true);
 		partieJeux.getBoardYard().PreparBoard(boarad);
-
+		sep2.setVisible(false);
 		for (int i = 0; i < boarad.getColumnCount(); i++) {
 
 			for (int j = 0; j < boarad.getRowCount(); j++) {
@@ -142,7 +148,6 @@ public class MyController implements Initializable {
 			}
 		} 
 
-		 partieJeux.cards.afficher();
 	}
 
 	// cette méthode est appellée en cliquant sur une carte pour l'afficher
@@ -154,7 +159,7 @@ public class MyController implements Initializable {
 		int idBtn = getbtnId(btn);
 		// vérifier si on est dans la première étape ( celle de regarder deux cartes)
 		// le numero de cette étape est 1
-		if ((partieJeux.getEtape() == 1) && !partieJeux.getCards().getCards().get(idBtn).getYokaiCart().isHasIndice()) {
+		if ((partieJeux.getEtape() == 1)) {
 
 			// la variable counter est initialisée a 2 lors de sa déclaration
 			// si le joueur regarde une carte on dicrémente le counter
@@ -202,21 +207,17 @@ public class MyController implements Initializable {
 			// là on est dans l'étape 2 donc le joueur va déplacer une carte
 			// la carte à déplacer est le bouton qui a reçu l'event click
 			carteTomove = btn;
-		} else if (partieJeux.getCards().getCards().get(idBtn).getYokaiCart().isHasIndice()) {
-			System.out.println(
-					partieJeux.getCards().getCards().get(idBtn).getYokaiCart().getName() + " taaaaaaaaaaaaaaf indice");
 		} else {
 			System.out.println("tu vas mettre " + carteIndiceDispo.getName());
 			placerIndiceSurCarte(btn);
-			System.out.println("Please shose an indice card ");
-			System.out.println("not here " + partieJeux.getEtape());
+			System.out.println("Please shoose an indice card ");
 		}
 	}
 
 	public void showCard(ImageView view, int index, Button btn) {
 
 		Image img;
-		if ((partieJeux.getEtape() == 1) && !partieJeux.getCards().getCards().get(index).getYokaiCart().isHasIndice()) {
+		if ((partieJeux.getEtape() == 1)) {
 			img = new Image(
 					"/images/yokaiImage/" + partieJeux.getCards().getCards().get(index).getYokaiCart() + ".jpg");
 			view.setImage(img);
@@ -471,8 +472,8 @@ public class MyController implements Initializable {
 
 	public boolean possibleToMove(int x, int y) {
 
-		if (getNodeByCoordinate(x, y + 1) || getNodeByCoordinate(x, y - 1) || getNodeByCoordinate(x + 1, y)
-				|| getNodeByCoordinate(x - 1, y)) {
+		if ((getNodeByCoordinate(x, y + 1) || getNodeByCoordinate(x, y - 1) || getNodeByCoordinate(x + 1, y)
+				|| getNodeByCoordinate(x - 1, y)) && LaisserPasCarteIsolee()) {
 			System.out.println("case available to receive any card");
 			return true;
 		} else {
@@ -480,6 +481,47 @@ public class MyController implements Initializable {
 			return false;
 		}
 		 
+	}
+	
+	public boolean LaisserPasCarteIsolee() {
+		boarad.getChildren().remove(carteTomove);
+		int idCarte = getbtnId(carteTomove);
+		int xCard=partieJeux.getCards().getCards().get(idCarte).getCord().getX();
+		int yCard=partieJeux.getCards().getCards().get(idCarte).getCord().getY();
+		
+		if (	
+					((getNodeByCoordinate(xCard+1, yCard))	&&	(
+				getNodeByCoordinate(xCard+2, yCard)||
+				getNodeByCoordinate(xCard+1, yCard+1)||
+				getNodeByCoordinate(xCard + 1, yCard-1)		)
+					)
+						||	
+				(	(getNodeByCoordinate(xCard, yCard+1)) &&	(
+				getNodeByCoordinate(xCard+1, yCard + 2)||
+				getNodeByCoordinate(xCard-1, yCard+1)    ||
+				getNodeByCoordinate(xCard + 1, yCard+1)	)
+					)
+						||
+				(	(getNodeByCoordinate(xCard-1, yCard)) &&	(
+				getNodeByCoordinate(xCard-2, yCard)||
+				getNodeByCoordinate(xCard-1, yCard-1)    ||
+				getNodeByCoordinate(xCard - 1, yCard+1)	)
+					)
+						||
+				(	(getNodeByCoordinate(xCard, yCard-1)) &&	(
+				getNodeByCoordinate(xCard, yCard-2)||
+				getNodeByCoordinate(xCard+1, yCard-1)    ||
+				getNodeByCoordinate(xCard - 1, yCard-1)	)
+					)
+				){
+			System.out.println("aucune carte est laissée isolée");
+			return true;
+		} else {
+			System.out.println("laaaaaaaaaaaaaaaaa");
+			boarad.getChildren().add(carteTomove);
+			System.out.println("faut pas laisser une carte seule!");
+			return false;
+		}
 	}
 
 	boolean getNodeByCoordinate(Integer row, Integer column) {
@@ -508,12 +550,13 @@ public class MyController implements Initializable {
 
 	// pressed the destination position to move a card
 	public void pressed(MouseEvent event, Node node) {
-
+		boarad.getChildren().remove(carteTomove);
 		x = boarad.getRowIndex(node);
 		y = boarad.getColumnIndex(node);
 		System.out.println("move to (" + x + "," + y + ")");
 		// deplacer une carte
 		if (partieJeux.getEtape() == 2) {
+			
 			if (possibleToMove(x, y)==true) {
 				System.out.println("you clicked mee (" + x + "," + y + ")");
 				if (carteTomove != null) {
@@ -525,6 +568,7 @@ public class MyController implements Initializable {
 				}
 
 			}else {
+				boarad.getChildren().add(carteTomove);
 				System.out.println("case error");
 			}
 		}
@@ -560,80 +604,21 @@ public class MyController implements Initializable {
 		view.setFitHeight(90);
 		view.setFitWidth(90);
 		btn.setGraphic(view);
-
-		switch (btn.getId()) {
-
-		case "position0_0":
-			partieJeux.getCards().getCards().get(0).getYokaiCart().setHasIndice(true);
-			break;
-
-		case "position0_01":
-
-			partieJeux.getCards().getCards().get(1).getYokaiCart().setHasIndice(true);
-			break;
-		case "position0_02":
-
-			partieJeux.getCards().getCards().get(2).getYokaiCart().setHasIndice(true);
-			break;
-		case "position0_03":
-
-			partieJeux.getCards().getCards().get(3).getYokaiCart().setHasIndice(true);
-			break;
-		case "position0_04":
-			partieJeux.getCards().getCards().get(4).getYokaiCart().setHasIndice(true);
-			break;
-
-		case "position0_05":
-			partieJeux.getCards().getCards().get(5).getYokaiCart().setHasIndice(true);
-			break;
-		case "position0_06":
-			partieJeux.getCards().getCards().get(6).getYokaiCart().setHasIndice(true);
-			break;
-		case "position0_07":
-			partieJeux.getCards().getCards().get(7).getYokaiCart().setHasIndice(true);
-			break;
-		case "position0_08":
-			partieJeux.getCards().getCards().get(8).getYokaiCart().setHasIndice(true);
-			break;
-		case "position0_09":
-			partieJeux.getCards().getCards().get(9).getYokaiCart().setHasIndice(true);
-			break;
-		case "position0_010":
-			partieJeux.getCards().getCards().get(10).getYokaiCart().setHasIndice(true);
-			break;
-		case "position0_011":
-			partieJeux.getCards().getCards().get(11).getYokaiCart().setHasIndice(true);
-			break;
-		case "position0_012":
-			partieJeux.getCards().getCards().get(12).getYokaiCart().setHasIndice(true);
-			break;
-		case "position0_013":
-			partieJeux.getCards().getCards().get(13).getYokaiCart().setHasIndice(true);
-			break;
-
-		case "position0_014":
-			partieJeux.getCards().getCards().get(14).getYokaiCart().setHasIndice(true);
-			break;
-		case "position0_015":
-			partieJeux.getCards().getCards().get(15).getYokaiCart().setHasIndice(true);
-			break;
-
-		default:
-			System.out.println("Choix incorrect");
-			break;
+		btn.setDisable(true);
+		if(sep1.isVisible()) {
+			sep1.setVisible(false);
+			sep2.setVisible(true);
+		}else {
+			sep1.setVisible(true);
+			sep2.setVisible(false);
 		}
+		Image img2 = new Image("/images/dos_indice.jpg");
+		ImageView view2 = new ImageView(img2);
+		view2.setFitHeight(200);
+		view2.setFitWidth(200);
+		btn_carte_indice_reveald.setGraphic(view2);
+		partieJeux.NextStep();
 		
-		/*
-		 * Image img2 = new Image("/images/dos_indice.jpg"); ImageView view2 = new
-		 * ImageView(img2); view2.setFitHeight(200); view2.setFitWidth(200);
-		 * btn_carte_indice_reveald.setGraphic(view2); partieJeux.NextStep();
-		 */
 	}
-	/*
-	 * public void resizeTheBoard() { boardPanScrol.setMinSize(boarad.getMaxWidth(),
-	 * boarad.getMaxHeight()); boardPanScrol.setMaxSize(boarad.getMaxWidth(),
-	 * boarad.getMaxHeight());
-	 * 
-	 * }
-	 */
+	
 }

@@ -6,8 +6,6 @@ import java.util.List;
 import javafx.scene.layout.GridPane;
 public final class Partie {
 	private static Partie partieJeux  ;
-	
-	
 	public List<Players> players;
 	public int numberPlayer;
 	public YokaiplayingCard cards;
@@ -102,18 +100,11 @@ public final class Partie {
 
 	public boolean CartIndiceReveled() {
 		cardIndiceShowing.add(CardIndicePlaying.getCardindice().get(this.cardsIndice.getCardindice().size() - 1));
-		/*
-		 * System.out.println("cards releaved "); for (CardIndiceShowing c :
-		 * cardIndiceShowing) { System.out.println("YokaiplayingCardIndice [ cards=" +
-		 * c.getCartIndice() + "] "); }
-		 */
-		
-
 		return cardsIndice.removedFrom();
 
 	}
 	public void afficher () {
-		for (YokaiCartShowing car :cards.getCards()) {
+		for (YokaiCardShowing car :cards.getCards()) {
 			System.out.println("------------------");
 			System.out.println(car.getYokaiCart().getName()+ " :"+car.getCord().getX()+ ","+car.getCord().getY());
 		}

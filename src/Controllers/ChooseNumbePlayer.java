@@ -35,21 +35,14 @@ public class ChooseNumbePlayer implements Initializable {
 	void ShoseNumberPLayers(ActionEvent event) {
 		opneNEwWindows= new openNewWindowa(); 
 		Button btnn = (Button) event.getSource();
-		System.out.println(btnn.getId());
 		if (btnn.getId().equals("twoPlayer")) {
-			System.out.println("coco");
 			partieJeux.setNumberPlayer(2);
-			System.out.println("oooooooooooch :"+partieJeux.getNumberPlayer());
-			// labelNomrePLayer.setText("1");
+			twoPlayer.getScene().getWindow().hide();
 			opneNEwWindows.open("/FichierXml/playersName.fxml");
 
 		} else if (btnn.getId() == "") {
-			System.out.println("im inside  if 2 ");
-
 		} else if (btnn.getId() == "") {
-			System.out.println("im inside  if 3");
 		} else {
-			System.out.println("im inside  else  ");
 		}
 	}
 

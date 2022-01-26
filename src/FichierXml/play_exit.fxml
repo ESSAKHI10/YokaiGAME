@@ -10,7 +10,6 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="611.0" prefWidth="567.0" styleClass="screenPlay" stylesheets="@../application/application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.PlayController">
    <children>
       <Pane layoutX="-4.0" layoutY="-1.0" prefHeight="618.0" prefWidth="575.0" styleClass="backgroundColor" stylesheets="@../application/application.css">
@@ -29,7 +28,7 @@
             <Rectangle fx:id="oni" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="200.0" layoutX="322.0" layoutY="24.0" stroke="BLACK" strokeType="INSIDE" style="-fx-arc-height: 80; -fx-arc-width: 80;" width="200.0" />
             <Rectangle fx:id="rokurokubi" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="200.0" layoutX="47.0" layoutY="242.0" stroke="BLACK" strokeType="INSIDE" style="-fx-arc-height: 80; -fx-arc-width: 80;" width="200.0" />
             <Rectangle fx:id="kappa" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="200.0" layoutX="322.0" layoutY="242.0" stroke="BLACK" strokeType="INSIDE" style="-fx-arc-height: 80; -fx-arc-width: 80;" width="200.0" />
-            <Label fx:id="label_choose_player" layoutX="175.0" layoutY="456.0" text="Choose plyers Number">
+            <Label fx:id="label_choose_player" layoutX="96.0" layoutY="460.0" text="Choose plyers Number">
                <textFill>
                   <LinearGradient endX="1.0" endY="1.0">
                      <stops>
