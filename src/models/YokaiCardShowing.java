@@ -4,6 +4,7 @@ public class YokaiCardShowing {
 	private YokaiCart yokaiCart;
 	private coordinate cord;
 	private Boolean hasIndice;
+	private CarteIndice carteIndice;
 	public YokaiCardShowing(YokaiCart yokaiCart,   Boolean hasIndice) {
 		super();
 		this.yokaiCart = yokaiCart;
@@ -14,6 +15,13 @@ public class YokaiCardShowing {
 	}
 	public void setCord(coordinate cord) {
 		this.cord = cord;
+	}
+	
+	public CarteIndice getCarteIndice() {
+		return carteIndice;
+	}
+	public void setCarteIndice(CarteIndice carteIndice) {
+		this.carteIndice = carteIndice;
 	}
 	//getters setters
 	public YokaiCart getYokaiCart() {
