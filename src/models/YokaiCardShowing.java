@@ -3,11 +3,11 @@ package models;
 public class YokaiCardShowing {
 	private YokaiCart yokaiCart;
 	private coordinate cord;
-	private Boolean shown;
-	public YokaiCardShowing(YokaiCart yokaiCart,   Boolean shown) {
+	private Boolean hasIndice;
+	public YokaiCardShowing(YokaiCart yokaiCart,   Boolean hasIndice) {
 		super();
 		this.yokaiCart = yokaiCart;
-		this.shown = shown;
+		this.hasIndice = hasIndice;
 	}
 	public coordinate getCord() {
 		return cord;
@@ -22,15 +22,12 @@ public class YokaiCardShowing {
 	public void setYokaiCart(YokaiCart yokaiCart) {
 		this.yokaiCart = yokaiCart;
 	}
-	public Boolean getShown() {
-		return shown;
-	}
-	public void setShown(Boolean shown) {
-		this.shown = shown;
-	}
 	
-	public boolean showm() {
-		if (!shown) shown=!shown;
-		return shown;
+	
+	public Boolean getHasIndice() {
+		return hasIndice;
+	}
+	public void setHasIndice(Boolean hasIndice) {
+		this.hasIndice = hasIndice;
 	}
 }

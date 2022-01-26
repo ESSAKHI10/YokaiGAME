@@ -23,7 +23,9 @@ import javafx.scene.shape.Circle;
 import models.YokaiCart;
 import models.openNewWindowa;
 import models.Partie;
+import models.YokaiCardShowing;
 import models.BoardCase;
+import models.CardIndiceShowing;
 import models.CarteIndice;
 
 public class MyController implements Initializable {
@@ -128,7 +130,7 @@ public class MyController implements Initializable {
 	Partie partieJeux = Partie.getInstance();
 	public static Button carteTomove = null;
 	public static CarteIndice carteIndiceDispo;
-
+	public static int nbCarteYokaiNonIndice = 0;
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 
@@ -165,6 +167,15 @@ public class MyController implements Initializable {
 			// si le joueur regarde une carte on dicrémente le counter
 			// si le counter est égale à 0 cela veut dire que ke joueur a regardé les deux
 			// cartes
+			for (YokaiCardShowing yokai : partieJeux.getCards().getCards()) {
+				if(!yokai.getHasIndice()) {
+					nbCarteYokaiNonIndice++;
+				}
+			}
+			if(nbCarteYokaiNonIndice == 1) {
+				counter=1;
+			}
+			
 			if (counter != 0) {
 
 				Image img = new Image("images/dos_carte.jpg");
@@ -195,7 +206,6 @@ public class MyController implements Initializable {
 				t.start();
 				// fin thread
 				counter--;
-				System.out.println("card has been showed  :" + counter);
 				if (counter == 0) {
 					partieJeux.NextStep();
 					counter = 2;
@@ -208,12 +218,23 @@ public class MyController implements Initializable {
 			// la carte à déplacer est le bouton qui a reçu l'event click
 			carteTomove = btn;
 		} else {
-			System.out.println("tu vas mettre " + carteIndiceDispo.getName());
 			placerIndiceSurCarte(btn);
-			System.out.println("Please shoose an indice card ");
 		}
 	}
 
+	public void verifierFin() {
+		int nbResteYokai=0;
+		for (YokaiCardShowing yokai : partieJeux.getCards().getCards()) {
+			if(!yokai.getHasIndice()) {
+				nbResteYokai++;
+			}
+		}
+		if(nbResteYokai == 0) {
+			System.out.println("Fin de la partie");
+			verifierCarteIndice();
+			opneNEwWindows.open("/FichierXml/gameOver.fxml");
+		}
+	}
 	public void showCard(ImageView view, int index, Button btn) {
 
 		Image img;
@@ -222,7 +243,7 @@ public class MyController implements Initializable {
 					"/images/yokaiImage/" + partieJeux.getCards().getCards().get(index).getYokaiCart() + ".jpg");
 			view.setImage(img);
 			btn.setGraphic(view);
-			partieJeux.getCards().getCards().get(index).showm();
+			//partieJeux.getCards().getCards().get(index).showm();
 
 		} else {
 			System.out.println("sorry this card a deja un indice");
@@ -433,9 +454,9 @@ public class MyController implements Initializable {
 
 		// get the actual position of the card to color her place after moving her
 		int idCarte = getbtnId(carteTomove);
-		System.out.println("moving " + carteTomove.getId() + " (" + idCarte + ") : ("
-				+ partieJeux.getCards().getCards().get(3).getCord().getX() + ","
-				+ partieJeux.getCards().getCards().get(3).getCord().getY() + ")");
+//		System.out.println("moving " + carteTomove.getId() + " (" + idCarte + ") : ("
+//				+ partieJeux.getCards().getCards().get(3).getCord().getX() + ","
+//				+ partieJeux.getCards().getCards().get(3).getCord().getY() + ")");
 
 		// search for the color of the case from board list :
 
@@ -447,7 +468,7 @@ public class MyController implements Initializable {
 		pane2.setOnMousePressed(event -> pressed(event, pane2));
 		
 		
-        System.out.println("add panne to :" +partieJeux.getCards().getCards().get(idCarte).getCord().getX()+","+partieJeux.getCards().getCards().get(idCarte).getCord().getY());
+        //System.out.println("add panne to :" +partieJeux.getCards().getCards().get(idCarte).getCord().getX()+","+partieJeux.getCards().getCards().get(idCarte).getCord().getY());
         
         
 		// color the palce lefting
@@ -456,14 +477,14 @@ public class MyController implements Initializable {
 		boarad.add(pane2, (int) partieJeux.getCards().getCards().get(idCarte).getCord().getY(),
 				(int) partieJeux.getCards().getCards().get(idCarte).getCord().getX());
 
-		System.out.println("carte from liste board : {" + casse.getX() + " ," + casse.getY() + " }");
+		//System.out.println("carte from liste board : {" + casse.getX() + " ," + casse.getY() + " }");
 
 		// set the new coordinate to the card
 		partieJeux.getCards().getCards().get(idCarte).getCord().setX(x);
 		partieJeux.getCards().getCards().get(idCarte).getCord().setY(y);
 
 		boarad.add(carteTomove, y, x);
-		System.out.println("carte have been moved to (" + x + "," + y + ")");
+		//System.out.println("carte have been moved to (" + x + "," + y + ")");
 		carteTomove = null;
 		x =  -1;
 		y = -1;
@@ -474,10 +495,10 @@ public class MyController implements Initializable {
 
 		if ((getNodeByCoordinate(x, y + 1) || getNodeByCoordinate(x, y - 1) || getNodeByCoordinate(x + 1, y)
 				|| getNodeByCoordinate(x - 1, y)) && LaisserPasCarteIsolee()) {
-			System.out.println("case available to receive any card");
+			//System.out.println("case available to receive any card");
 			return true;
 		} else {
-			System.out.println("this case are not  available to receive any card");
+			//System.out.println("this case are not  available to receive any card");
 			return false;
 		}
 		 
@@ -489,7 +510,7 @@ public class MyController implements Initializable {
 		int xCard=partieJeux.getCards().getCards().get(idCarte).getCord().getX();
 		int yCard=partieJeux.getCards().getCards().get(idCarte).getCord().getY();
 		
-		System.out.println(boarad.getNodeOrientation().name());
+		//System.out.println(boarad.getNodeOrientation().name());
 		
 		if (	
 					((getNodeByCoordinate(xCard+1, yCard))	&&	(
@@ -516,12 +537,12 @@ public class MyController implements Initializable {
 				getNodeByCoordinate(xCard - 1, yCard-1)	)
 					)
 				){
-			System.out.println("aucune carte est laissée isolée");
+			//System.out.println("aucune carte est laissée isolée");
 			return true;
 		} else {
-			System.out.println("laaaaaaaaaaaaaaaaa");
+			//System.out.println("laaaaaaaaaaaaaaaaa");
 			boarad.getChildren().add(carteTomove);
-			System.out.println("faut pas laisser une carte seule!");
+			//System.out.println("faut pas laisser une carte seule!");
 			return false;
 		}
 	}
@@ -555,23 +576,23 @@ public class MyController implements Initializable {
 		boarad.getChildren().remove(carteTomove);
 		x = boarad.getRowIndex(node);
 		y = boarad.getColumnIndex(node);
-		System.out.println("move to (" + x + "," + y + ")");
+		//System.out.println("move to (" + x + "," + y + ")");
 		// deplacer une carte
 		if (partieJeux.getEtape() == 2) {
 			
 			if (possibleToMove(x, y)==true) {
-				System.out.println("you clicked mee (" + x + "," + y + ")");
+				//System.out.println("you clicked mee (" + x + "," + y + ")");
 				if (carteTomove != null) {
 					moveCard((Pane) node);
 					partieJeux.NextStep();
 					carteTomove = null;
 				} else {
-					System.out.println("Oops no cart has been chosen");
+					//System.out.println("Oops no cart has been chosen");
 				}
 
 			}else {
 				boarad.getChildren().add(carteTomove);
-				System.out.println("case error");
+				//System.out.println("case error");
 			}
 		}
 	}
@@ -580,25 +601,33 @@ public class MyController implements Initializable {
 	void ShowCartIndiceReveald(ActionEvent event) {
 		carteIndiceDispo = partieJeux.getCardsIndice().getCardindice()
 				.get(partieJeux.getCardsIndice().getCardindice().size() - 1).getCartIndice();
-
+		
+		partieJeux.getCardsIndice().getCardindice().get(partieJeux.getCardsIndice().getCardindice().size() - 1).setShown(true);
 		// partieJeux.getCardsIndice().afficher();
 		Image img = new Image("/images/indice/" + carteIndiceDispo + ".jpg");
 		ImageView view = new ImageView(img);
 		view.setFitHeight(125);
 		view.setFitWidth(125);
 		btn_carte_indice_reveald.setGraphic(view);
-		if (!partieJeux.CartIndiceReveled()) {
-
-			opneNEwWindows.open("/FichierXml/gameOver.fxml");
-		}
+//		if (!partieJeux.CartIndiceReveled()) {
+//			//verifierCarteIndice();
+//			//System.out.println("score = "+partieJeux.getTableScore().getScore());
+//			opneNEwWindows.open("/FichierXml/gameOver.fxml");
+//		}
 		btn_dos_indice.setDisable(true);
 	}
 
 	@FXML
-	void Use_cart_indice(ActionEvent event) {
-		// identifier quel est l'indice concerné par le click
-		System.out.println("----------" + carteIndiceDispo.getName());
-	}
+    void nePasUseCarteIndice() {
+		if(sep1.isVisible()) {
+			sep1.setVisible(false);
+			sep2.setVisible(true);
+		}else {
+			sep1.setVisible(true);
+			sep2.setVisible(false);
+		}
+		partieJeux.NextStep();
+    }
 
 	public void placerIndiceSurCarte(Button btn) {
 		Image img = new Image("/images/indice/" + carteIndiceDispo + ".jpg");
@@ -614,13 +643,51 @@ public class MyController implements Initializable {
 			sep1.setVisible(true);
 			sep2.setVisible(false);
 		}
+		int btnId= getbtnId(btn);
+		String carteIndiceName=carteIndiceDispo.getName();
+		String carteYokaiName=partieJeux.getCards().getCards().get(btnId).getYokaiCart().getName();
+		if((carteIndiceName=="indice_bleu" && carteYokaiName=="Oni")
+				|| (carteIndiceName=="indice_vert" && carteYokaiName=="Kappa")
+				|| (carteIndiceName=="indice_violet" && carteYokaiName=="Rokurokubi")
+				|| (carteIndiceName=="indice_rouge" && carteYokaiName=="Kitsune")
+				|| (carteIndiceName=="indice_bleu_rouge" && ((carteYokaiName=="Oni")||(carteYokaiName=="Kitsune")))
+				|| (carteIndiceName=="indice_vert_bleu" && ((carteYokaiName=="Oni")||(carteYokaiName=="Kappa")))
+				|| (carteIndiceName=="indice_bleu_violet" && ((carteYokaiName=="Oni")||(carteYokaiName=="Rokurokubi")))
+				|| (carteIndiceName=="indice_rouge_violet" && ((carteYokaiName=="Kitsune")||(carteYokaiName=="Rokurokubi")))
+				|| (carteIndiceName=="indice_vert_rouge" && ((carteYokaiName=="Kappa")||(carteYokaiName=="Kitsune")))
+				|| (carteIndiceName=="indice_vert_violet" && ((carteYokaiName=="Kappa")||(carteYokaiName=="Rokurokubi")))
+				|| (carteIndiceName=="indice_bleu_vert_rouge" && ((carteYokaiName=="Oni")||(carteYokaiName=="Kappa")||(carteYokaiName=="Kitsune")))
+				|| (carteIndiceName=="idice_bleu_vert_violet" && ((carteYokaiName=="Oni")||(carteYokaiName=="Kappa")||(carteYokaiName=="Rokurokubi")))
+				|| (carteIndiceName=="indcice_bleu_violet_rouge" && ((carteYokaiName=="Oni")||(carteYokaiName=="Rokurokubi")||(carteYokaiName=="Kitsune")))
+				|| (carteIndiceName=="indice_vert_violet_rouge" && ((carteYokaiName=="Kappa")||(carteYokaiName=="Rokurokubi")||(carteYokaiName=="Kitsune")))
+				){
+			
+			partieJeux.getTableScore().setScore(partieJeux.getTableScore().getScore()+1);
+			System.out.println("+1 score = "+partieJeux.getTableScore().getScore());
+		}else {
+			
+			partieJeux.getTableScore().setScore(partieJeux.getTableScore().getScore()-1);
+			System.out.println("-1 score = "+partieJeux.getTableScore().getScore());
+		}
+		partieJeux.getCardsIndice().getCardindice().get(partieJeux.getCardsIndice().getCardindice().size() - 1).setUsed(true);
+		partieJeux.getCards().getCards().get(btnId).setHasIndice(true);
 		Image img2 = new Image("/images/dos_indice.jpg");
 		ImageView view2 = new ImageView(img2);
 		view2.setFitHeight(200);
 		view2.setFitWidth(200);
 		btn_carte_indice_reveald.setGraphic(view2);
+		System.out.println("indice size= "+partieJeux.getCardsIndice().getCardindice().size());
 		partieJeux.NextStep();
 		
 	}
-	
+	public void verifierCarteIndice() {
+		for (CardIndiceShowing carteIndice : partieJeux.getCardsIndice().getCardindice()) {
+			if(carteIndice.getShown() || !carteIndice.isUsed()) {
+				partieJeux.getTableScore().setScore(partieJeux.getTableScore().getScore()+2);
+			}else if(!carteIndice.getShown()) {
+				partieJeux.getTableScore().setScore(partieJeux.getTableScore().getScore()+5);
+			}
+			
+		}
+	}
 }
