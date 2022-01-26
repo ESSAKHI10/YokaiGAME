@@ -489,6 +489,8 @@ public class MyController implements Initializable {
 		int xCard=partieJeux.getCards().getCards().get(idCarte).getCord().getX();
 		int yCard=partieJeux.getCards().getCards().get(idCarte).getCord().getY();
 		
+		System.out.println(boarad.getNodeOrientation().name());
+		
 		if (	
 					((getNodeByCoordinate(xCard+1, yCard))	&&	(
 				getNodeByCoordinate(xCard+2, yCard)||
