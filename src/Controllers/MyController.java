@@ -134,7 +134,7 @@ public class MyController implements Initializable {
 	Partie partieJeux = Partie.getInstance();
 	public static Button carteTomove = null;
 	public static CarteIndice carteIndiceDispo;
-	static long min, sec, hr, totalSec = 0;
+	 
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -147,7 +147,7 @@ public class MyController implements Initializable {
 		btn_dos_indice.setDisable(true);
 		partieJeux.getBoardYard().PreparBoard(boarad);
 		sep2.setVisible(false);
-		totalSec = 10 * 30;
+	 
 		for (int i = 0; i < boarad.getColumnCount(); i++) {
 
 			for (int j = 0; j < boarad.getRowCount(); j++) {
@@ -566,31 +566,7 @@ public class MyController implements Initializable {
 
 	}
 
-	/*
-	 * public boolean LaisserPasCarteIsolee() {
-	 * boarad.getChildren().remove(carteTomove); int idCarte =
-	 * getbtnId(carteTomove); int xCard =
-	 * partieJeux.getCards().getCards().get(idCarte).getCord().getX(); int yCard =
-	 * partieJeux.getCards().getCards().get(idCarte).getCord().getY();
-	 * 
-	 * System.out.println(boarad.getNodeOrientation().name());
-	 * 
-	 * if (((getNodeByCoordinate(xCard + 1, yCard)) && (getNodeByCoordinate(xCard +
-	 * 2, yCard) || getNodeByCoordinate(xCard + 1, yCard + 1) ||
-	 * getNodeByCoordinate(xCard + 1, yCard - 1))) || ((getNodeByCoordinate(xCard,
-	 * yCard + 1)) && (getNodeByCoordinate(xCard + 1, yCard + 2) ||
-	 * getNodeByCoordinate(xCard - 1, yCard + 1) || getNodeByCoordinate(xCard + 1,
-	 * yCard + 1))) || ((getNodeByCoordinate(xCard - 1, yCard)) &&
-	 * (getNodeByCoordinate(xCard - 2, yCard) || getNodeByCoordinate(xCard - 1,
-	 * yCard - 1) || getNodeByCoordinate(xCard - 1, yCard + 1))) ||
-	 * ((getNodeByCoordinate(xCard, yCard - 1)) && (getNodeByCoordinate(xCard, yCard
-	 * - 2) || getNodeByCoordinate(xCard + 1, yCard - 1) ||
-	 * getNodeByCoordinate(xCard - 1, yCard - 1)))) {
-	 * System.out.println("aucune carte est laissée isolée"); return true; } else {
-	 * System.out.println("laaaaaaaaaaaaaaaaa");
-	 * boarad.getChildren().add(carteTomove);
-	 * System.out.println("faut pas laisser une carte seule!"); return false; } }
-	 */
+	 
 
 	boolean boardPane(Integer row, Integer column) {
 		for (Node node : boarad.getChildren()) {
