@@ -10,6 +10,8 @@ import javafx.scene.control.Label;
 public class timerTask {
 	static long min, sec, hr, totalSec = 0;
 	String time ;
+
+	public openNewWindowa opneNEwWindows;
     public timerTask() {
 	 
 	
@@ -34,6 +36,8 @@ public class timerTask {
 	    		 if (totalSec<0) {
 	    			 System.out.println("time over");
 	    			 timer.cancel();
+	    				opneNEwWindows= new openNewWindowa();
+	    				opneNEwWindows.open("/FichierXml/gameOver.fxml");
 	    		 }
 	    		 
 			

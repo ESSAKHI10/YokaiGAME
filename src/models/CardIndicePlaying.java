@@ -39,8 +39,9 @@ public class CardIndicePlaying {
 	}
 
 	public boolean removedFrom() {
-		if (this.cardindice.size()!=1) {
+		if (this.cardindice.size()!= 1) {
 			System.out.println(this.cardindice.size());
+			 
 			cardindice.remove(this.cardindice.size() - 1);
 			return true;
 		}

@@ -16,7 +16,7 @@ public class YokaiplayingCard {
 			}
 
 		}
-		shuffle();
+	//	shuffle();
 		positon();
 	}
 

@@ -134,7 +134,6 @@ public class MyController implements Initializable {
 	Partie partieJeux = Partie.getInstance();
 	public static Button carteTomove = null;
 	public static CarteIndice carteIndiceDispo;
-	 
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -144,10 +143,10 @@ public class MyController implements Initializable {
 		cercel_player1.setFill(new ImagePattern(img));
 		txtPlayer1.setText(partieJeux.getPlayers().get(0).getName());
 		txtPlayer2.setText(partieJeux.getPlayers().get(1).getName());
-		btn_dos_indice.setDisable(true);
+		// btn_dos_indice.setDisable(true);
 		partieJeux.getBoardYard().PreparBoard(boarad);
 		sep2.setVisible(false);
-	 
+
 		for (int i = 0; i < boarad.getColumnCount(); i++) {
 
 			for (int j = 0; j < boarad.getRowCount(); j++) {
@@ -160,6 +159,7 @@ public class MyController implements Initializable {
 		tm.setTimer(label_timer);
 
 	}
+//winnig /losing party :
 
 	// cette méthode est appellée en cliquant sur une carte pour l'afficher
 	@FXML
@@ -239,11 +239,6 @@ public class MyController implements Initializable {
 			System.out.println("sorry this card a deja un indice");
 
 		}
-
-	}
-
-//additional method to work on //moving a card with  dragging
-	public void dragged(MouseEvent event, YokaiCart p) {
 
 	}
 
@@ -476,7 +471,7 @@ public class MyController implements Initializable {
 		carteTomove = null;
 		x = -1;
 		y = -1;
-		btn_dos_indice.setDisable(false);
+		// fe btn_dos_indice.setDisable(false);
 
 		System.out.println(
 				"--------------------------------------fin move card fonction--------------------------------------");
@@ -496,60 +491,54 @@ public class MyController implements Initializable {
 	}
 
 	public boolean validerLeDeplacement(int x, int y) {
-		int  top=-1, down=-1, right=-1, left =-1;
-		 
+		int top = -1, down = -1, right = -1, left = -1;
+
 		if (getNodeByCoordinate(x, y + 1)) {
-			if ( possibleToMove(x, y + 1)) {
+			if (possibleToMove(x, y + 1)) {
 				right = 1;
-			}else {
-				System.out.println("you can left cas right {" + x + "," + y+1 + "} alone");
-				right =0;
+			} else {
+				System.out.println("you can left cas right {" + x + "," + y + 1 + "} alone");
+				right = 0;
 			}
-		 
 
 		}
 		if (getNodeByCoordinate(x, y - 1)) {
-			if(possibleToMove(x, y - 1)) {
-				left =1;
-			}else {
-				System.out.println("you can left cas left  {" + x + "," + (y-1) + "} alone");
-				left =0;
+			if (possibleToMove(x, y - 1)) {
+				left = 1;
+			} else {
+				System.out.println("you can left cas left  {" + x + "," + (y - 1) + "} alone");
+				left = 0;
 			}
-
-		 
 
 		}
 
 		if (getNodeByCoordinate(x + 1, y)) {
 			if (possibleToMove(x + 1, y)) {
-				top =1;
-			}else {
-				System.out.println("you can left cas top {" + (x+1)+ "," + y + "} alone");
+				top = 1;
+			} else {
+				System.out.println("you can left cas top {" + (x + 1) + "," + y + "} alone");
 				top = 0;
 			}
- 
 
 		}
 
 		if (getNodeByCoordinate(x - 1, y)) {
-			if( possibleToMove(x - 1, y)){
+			if (possibleToMove(x - 1, y)) {
 				down = 1;
-			}else {
-				System.out.println("you can left case down {" + (x-1) + "," + y + "} alone");
-				down=0;
+			} else {
+				System.out.println("you can left case down {" + (x - 1) + "," + y + "} alone");
+				down = 0;
 			}
- 
 
 			System.out.println("----------------------------- fin valider les deplacemet--------------- ");
 
 		}
-	   
-      if (top == 0  || down == 0 || right== 0 ||left== 0) {
-    	  return false;
-      }else {
-    	  return true;
-      }
-		
+
+		if (top == 0 || down == 0 || right == 0 || left == 0) {
+			return false;
+		} else {
+			return true;
+		}
 
 	}
 
@@ -566,8 +555,6 @@ public class MyController implements Initializable {
 
 	}
 
-	 
-
 	boolean boardPane(Integer row, Integer column) {
 		for (Node node : boarad.getChildren()) {
 			if (boarad.getRowIndex(node) == row && boarad.getColumnIndex(node) == column) {
@@ -580,6 +567,12 @@ public class MyController implements Initializable {
 		return false;
 	}
 
+	public boolean partieState() {
+
+		return false;
+
+	}
+
 	// pressed the destination position to move a card
 	public void pressed(MouseEvent event, Node node) {
 		boarad.getChildren().remove(carteTomove);
@@ -589,37 +582,34 @@ public class MyController implements Initializable {
 		// deplacer une carte
 		if (partieJeux.getEtape() == 2) {
 			// if (possibleToMove(x, y) == true) ->verify the case that where are moving to
-			if (possibleToMove(x, y) == true  ) {
+			if (possibleToMove(x, y) == true) {
 
 				if (carteTomove != null) {
 					int idCarte = getbtnId(carteTomove);
 //	// verify the case that where leaving
 					if (validerLeDeplacement(partieJeux.getCards().getCards().get(idCarte).getCord().getX(),
 							partieJeux.getCards().getCards().get(idCarte).getCord().getY())) {
-								System.out.println("-------------------- pressed debut --------------");
-					// --------------------------------------------------------------------------------------------
-					
-				
+						System.out.println("-------------------- pressed debut --------------");
+						// --------------------------------------------------------------------------------------------
 
-					System.out.println("carte to move " + getbtnId(carteTomove) + " :"
-							+ partieJeux.getCards().getCards().get(idCarte).getCord().getX() + ","
-							+ partieJeux.getCards().getCards().get(idCarte).getCord().getY() + " To : (" + x + "," + y
-							+ ") ");
-					 
+						System.out.println("carte to move " + getbtnId(carteTomove) + " :"
+								+ partieJeux.getCards().getCards().get(idCarte).getCord().getX() + ","
+								+ partieJeux.getCards().getCards().get(idCarte).getCord().getY() + " To : (" + x + ","
+								+ y + ") ");
 
-					// --------------------------------------------------------------------------------------------
-					moveCard((Pane) node);
-					partieJeux.NextStep();
-					carteTomove = null;
-						
-					}else {
+						// --------------------------------------------------------------------------------------------
+						moveCard((Pane) node);
+						partieJeux.NextStep();
+						carteTomove = null;
+
+					} else {
 						boarad.getChildren().add(carteTomove);
 						System.out.println("please dont left alone ;( ");
 					}
-			
+
 					System.out.println("-------------------- fin pressed debut --------------");
 				} else {
-					
+
 					System.out.println("Oops no cart has been chosen");
 				}
 
@@ -642,10 +632,11 @@ public class MyController implements Initializable {
 		view.setFitWidth(125);
 		btn_carte_indice_reveald.setGraphic(view);
 		if (!partieJeux.CartIndiceReveled()) {
-
+			opneNEwWindows = new openNewWindowa();
 			opneNEwWindows.open("/FichierXml/gameOver.fxml");
+			partieJeux.Score();
 		}
-		btn_dos_indice.setDisable(true);
+		// btn_dos_indice.setDisable(true);
 	}
 
 	@FXML
