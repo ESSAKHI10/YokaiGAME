@@ -20,6 +20,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.ImagePattern;
@@ -28,6 +30,7 @@ import models.YokaiCart;
 import models.openNewWindowa;
 import models.timerTask;
 import models.Partie;
+import models.YokaiCardShowing;
 import models.BoardCase;
 import models.CarteIndice;
 
@@ -38,6 +41,9 @@ public class MyController implements Initializable {
 	@FXML
 	private Button btn_nextPlayer;
 
+	@FXML
+    private Button btnDontUse;
+	
 	@FXML
 	private TextField textFieldPLayerName;
 	@FXML
@@ -134,11 +140,13 @@ public class MyController implements Initializable {
 	Partie partieJeux = Partie.getInstance();
 	public static Button carteTomove = null;
 	public static CarteIndice carteIndiceDispo;
+ 
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-
+		opneNEwWindows  = new openNewWindowa();
 		Image img = new Image("/images/icons/badlion_100px.png");
+		btnDontUse.setStyle("-fx-background-image: url('/images/icons/index.png')");
 		cercel_player.setFill(new ImagePattern(img));
 		cercel_player1.setFill(new ImagePattern(img));
 		txtPlayer1.setText(partieJeux.getPlayers().get(0).getName());
@@ -146,7 +154,8 @@ public class MyController implements Initializable {
 		// btn_dos_indice.setDisable(true);
 		partieJeux.getBoardYard().PreparBoard(boarad);
 		sep2.setVisible(false);
-
+ 
+ 
 		for (int i = 0; i < boarad.getColumnCount(); i++) {
 
 			for (int j = 0; j < boarad.getRowCount(); j++) {
@@ -176,6 +185,9 @@ public class MyController implements Initializable {
 			// si le joueur regarde une carte on dicrémente le counter
 			// si le counter est égale à 0 cela veut dire que ke joueur a regardé les deux
 			// cartes
+			
+			
+			
 			if (counter != 0) {
 
 				Image img = new Image("images/dos_carte.jpg");
@@ -210,7 +222,6 @@ public class MyController implements Initializable {
 				if (counter == 0) {
 					partieJeux.NextStep();
 					counter = 2;
-
 				}
 			}
 
@@ -233,7 +244,7 @@ public class MyController implements Initializable {
 					"/images/yokaiImage/" + partieJeux.getCards().getCards().get(index).getYokaiCart() + ".jpg");
 			view.setImage(img);
 			btn.setGraphic(view);
-			partieJeux.getCards().getCards().get(index).showm();
+			//partieJeux.getCards().getCards().get(index).showm();
 
 		} else {
 			System.out.println("sorry this card a deja un indice");
@@ -490,6 +501,17 @@ public class MyController implements Initializable {
 		return false;
 	}
 
+	@FXML
+    void nePasUseCarteIndice() {
+		if(sep1.isVisible()) {
+			sep1.setVisible(false);
+			sep2.setVisible(true);
+		}else {
+			sep1.setVisible(true);
+			sep2.setVisible(false);
+		}
+		partieJeux.NextStep();
+    }
 	public boolean validerLeDeplacement(int x, int y) {
 		int top = -1, down = -1, right = -1, left = -1;
 
@@ -555,6 +577,7 @@ public class MyController implements Initializable {
 
 	}
 
+ 
 	boolean boardPane(Integer row, Integer column) {
 		for (Node node : boarad.getChildren()) {
 			if (boarad.getRowIndex(node) == row && boarad.getColumnIndex(node) == column) {
@@ -631,12 +654,17 @@ public class MyController implements Initializable {
 		view.setFitHeight(125);
 		view.setFitWidth(125);
 		btn_carte_indice_reveald.setGraphic(view);
+ 
 		if (!partieJeux.CartIndiceReveled()) {
 			opneNEwWindows = new openNewWindowa();
 			opneNEwWindows.open("/FichierXml/gameOver.fxml");
 			partieJeux.Score();
 		}
 		// btn_dos_indice.setDisable(true);
+ 
+		
+		btn_dos_indice.setDisable(true);
+ 
 	}
 
 	@FXML
@@ -658,14 +686,48 @@ public class MyController implements Initializable {
 		} else {
 			sep1.setVisible(true);
 			sep2.setVisible(false);
-		}
+		}int btnId= getbtnId(btn);
+		//String carteIndiceName=carteIndiceDispo.getName();
+		//String carteYokaiName=partieJeux.getCards().getCards().get(btnId).getYokaiCart().getName();
+//		if((carteIndiceName=="indice_bleu" && carteYokaiName=="Oni")
+//				|| (carteIndiceName=="indice_vert" && carteYokaiName=="Kappa")
+//				|| (carteIndiceName=="indice_violet" && carteYokaiName=="Rokurokubi")
+//				|| (carteIndiceName=="indice_rouge" && carteYokaiName=="Kitsune")
+//				|| (carteIndiceName=="indice_bleu_rouge" && ((carteYokaiName=="Oni")||(carteYokaiName=="Kitsune")))
+//				|| (carteIndiceName=="indice_vert_bleu" && ((carteYokaiName=="Oni")||(carteYokaiName=="Kappa")))
+//				|| (carteIndiceName=="indice_bleu_violet" && ((carteYokaiName=="Oni")||(carteYokaiName=="Rokurokubi")))
+//				|| (carteIndiceName=="indice_rouge_violet" && ((carteYokaiName=="Kitsune")||(carteYokaiName=="Rokurokubi")))
+//				|| (carteIndiceName=="indice_vert_rouge" && ((carteYokaiName=="Kappa")||(carteYokaiName=="Kitsune")))
+//				|| (carteIndiceName=="indice_vert_violet" && ((carteYokaiName=="Kappa")||(carteYokaiName=="Rokurokubi")))
+//				|| (carteIndiceName=="indice_bleu_vert_rouge" && ((carteYokaiName=="Oni")||(carteYokaiName=="Kappa")||(carteYokaiName=="Kitsune")))
+//				|| (carteIndiceName=="idice_bleu_vert_violet" && ((carteYokaiName=="Oni")||(carteYokaiName=="Kappa")||(carteYokaiName=="Rokurokubi")))
+//				|| (carteIndiceName=="indcice_bleu_violet_rouge" && ((carteYokaiName=="Oni")||(carteYokaiName=="Rokurokubi")||(carteYokaiName=="Kitsune")))
+//				|| (carteIndiceName=="indice_vert_violet_rouge" && ((carteYokaiName=="Kappa")||(carteYokaiName=="Rokurokubi")||(carteYokaiName=="Kitsune")))
+//				){
+//			
+//			partieJeux.getTableScore().setScore(partieJeux.getTableScore().getScore()+1);
+//			System.out.println("+1 score = "+partieJeux.getTableScore().getScore());
+//		}else {
+//			
+//			partieJeux.getTableScore().setScore(partieJeux.getTableScore().getScore()-1);
+//			System.out.println("-1 score = "+partieJeux.getTableScore().getScore());
+//		}
+		partieJeux.getCardsIndice().getCardindice().get(partieJeux.getCardsIndice().getCardindice().size() - 1).setUsed(true);
+		partieJeux.getCards().getCards().get(btnId).setHasIndice(true);
+		partieJeux.getCards().getCards().get(btnId).setCarteIndice(carteIndiceDispo);
 		Image img2 = new Image("/images/dos_indice.jpg");
 		ImageView view2 = new ImageView(img2);
 		view2.setFitHeight(200);
 		view2.setFitWidth(200);
 		btn_carte_indice_reveald.setGraphic(view2);
 		partieJeux.NextStep();
+		if (!partieJeux.CartIndiceReveled()) {
+			
+			opneNEwWindows.open("/FichierXml/gameOver.fxml");
+			btn_dos_indice.setDisable(true);
+		}
 
 	}
 
 }
+

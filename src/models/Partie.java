@@ -14,8 +14,13 @@ public final class Partie {
 	public List<CardIndiceShowing> cardIndiceShowing;
 	public int etape;
 	private Board boardYard;
+ 
 	private boolean gameOver;
-
+ 
+    private TableScore tableScore;
+    
+ 
+ 
 	public Board getBoardYard() {
 		return boardYard;
 	}
@@ -40,7 +45,7 @@ public final class Partie {
 		this.cardIndiceShowing = new ArrayList<CardIndiceShowing>();
 		this.etape = 1;
 		this.boardYard = new Board();
-
+		this.tableScore= TableScore.getInstance(0, "");
 	}
 
 	public static synchronized Partie getInstance() {
@@ -52,6 +57,17 @@ public final class Partie {
 		System.out.println("already exits");
 		return partieJeux;
 	}
+ 
+	
+	
+	public TableScore getTableScore() {
+		return tableScore;
+	}
+
+	public void setTableScore(TableScore tableScore) {
+		this.tableScore = tableScore;
+	}
+
 
 	public List<Players> getPlayers() {
 		return players;
@@ -119,9 +135,15 @@ public final class Partie {
 	}
 
 	public void NextStep() {
+ 
 
-		this.setEtape(this.getEtape() + 1);
-		if (this.getEtape() == 4) {
+		 
+ 
+		
+		
+		this.setEtape(this.getEtape()+1);
+		if (this.getEtape()  == 4) {
+ 
 			this.setEtape(1);
 			// System.out.println("next player---------------------------" + getEtape());
 

@@ -7,17 +7,16 @@ import java.util.Random;
 
 public class CardIndicePlaying {
 	private static List<CardIndiceShowing> cardindice;
-
 	public CardIndicePlaying() {
 		cardindice = new ArrayList<CardIndiceShowing>();
 		for (CarteIndice card : CarteIndice.values()) {
-
+			
 			System.out.println("  [" + card + "]    ");
 			cardindice.add(new CardIndiceShowing(card, false));
 
 		}
 		shuffle();
-
+		
 	}
 
 	public void shuffle() {
