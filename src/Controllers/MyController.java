@@ -2,6 +2,10 @@ package Controllers;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.concurrent.TimeUnit;
+
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -22,6 +26,7 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import models.YokaiCart;
 import models.openNewWindowa;
+import models.timerTask;
 import models.Partie;
 import models.BoardCase;
 import models.CarteIndice;
@@ -43,7 +48,8 @@ public class MyController implements Initializable {
 
 	@FXML
 	private Button position0_01;
-
+	@FXML
+	private Label label_timer;
 	@FXML
 	private Button position0_010;
 
@@ -82,25 +88,25 @@ public class MyController implements Initializable {
 
 	@FXML
 	private Button position0_08;
-	
-	@FXML
-    private Label txtPlayer1;
 
-    @FXML
-    private Label txtPlayer2;
-    
-    @FXML
-    private Separator sep1;
-    
-    @FXML
-    private Separator sep2;
-    
+	@FXML
+	private Label txtPlayer1;
+
+	@FXML
+	private Label txtPlayer2;
+
+	@FXML
+	private Separator sep1;
+
+	@FXML
+	private Separator sep2;
+
 	@FXML
 	private Circle cercel_player;
-	
+
 	@FXML
 	private Circle cercel_player1;
-	
+
 	@FXML
 	private Button position0_09;
 	@FXML
@@ -128,6 +134,7 @@ public class MyController implements Initializable {
 	Partie partieJeux = Partie.getInstance();
 	public static Button carteTomove = null;
 	public static CarteIndice carteIndiceDispo;
+	static long min, sec, hr, totalSec = 0;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -140,13 +147,17 @@ public class MyController implements Initializable {
 		btn_dos_indice.setDisable(true);
 		partieJeux.getBoardYard().PreparBoard(boarad);
 		sep2.setVisible(false);
+		totalSec = 10 * 30;
 		for (int i = 0; i < boarad.getColumnCount(); i++) {
 
 			for (int j = 0; j < boarad.getRowCount(); j++) {
 
 				boardPane(i, j);
 			}
-		} 
+		}
+
+		timerTask tm = new timerTask();
+		tm.setTimer(label_timer);
 
 	}
 
@@ -208,9 +219,9 @@ public class MyController implements Initializable {
 			// la carte à déplacer est le bouton qui a reçu l'event click
 			carteTomove = btn;
 		} else {
-			System.out.println("tu vas mettre " + carteIndiceDispo.getName());
+			// System.out.println("tu vas mettre " + carteIndiceDispo.getName());
 			placerIndiceSurCarte(btn);
-			System.out.println("Please shoose an indice card ");
+			// System.out.println("Please shoose an indice card ");
 		}
 	}
 
@@ -307,8 +318,8 @@ public class MyController implements Initializable {
 		switch (btn.getId()) {
 
 		case "position0_0":
-			//partieJeux.getCards().getCards().get(0).getYokaiCart().setX(8);
-			//partieJeux.getCards().getCards().get(0).getYokaiCart().setY(8);
+			// partieJeux.getCards().getCards().get(0).getYokaiCart().setX(8);
+			// partieJeux.getCards().getCards().get(0).getYokaiCart().setY(8);
 			showCard(view, 0, btn);
 
 			card_index = 0;
@@ -317,97 +328,97 @@ public class MyController implements Initializable {
 
 		case "position0_01":
 
-			//partieJeux.getCards().getCards().get(1).getYokaiCart().setX(8);
-		//	partieJeux.getCards().getCards().get(1).getYokaiCart().setY(9);
+			// partieJeux.getCards().getCards().get(1).getYokaiCart().setX(8);
+			// partieJeux.getCards().getCards().get(1).getYokaiCart().setY(9);
 			showCard(view, 1, btn);
 			card_index = 1;
 			break;
 		case "position0_02":
 
-		//	partieJeux.getCards().getCards().get(2).getYokaiCart().setX(8);
-		//	partieJeux.getCards().getCards().get(2).getYokaiCart().setY(10);
+			// partieJeux.getCards().getCards().get(2).getYokaiCart().setX(8);
+			// partieJeux.getCards().getCards().get(2).getYokaiCart().setY(10);
 			showCard(view, 2, btn);
 			card_index = 2;
 			break;
 
 		case "position0_03":
 
-		//	partieJeux.getCards().getCards().get(3).getYokaiCart().setX(8);
-		//	partieJeux.getCards().getCards().get(3).getYokaiCart().setY(11);
+			// partieJeux.getCards().getCards().get(3).getYokaiCart().setX(8);
+			// partieJeux.getCards().getCards().get(3).getYokaiCart().setY(11);
 			showCard(view, 3, btn);
 			card_index = 3;
 			break;
 		case "position0_04":
-		//	partieJeux.getCards().getCards().get(4).getYokaiCart().setX(9);
-		//	partieJeux.getCards().getCards().get(4).getYokaiCart().setY(8);
+			// partieJeux.getCards().getCards().get(4).getYokaiCart().setX(9);
+			// partieJeux.getCards().getCards().get(4).getYokaiCart().setY(8);
 			showCard(view, 4, btn);
 			card_index = 4;
 			break;
 
 		case "position0_05":
-		//	partieJeux.getCards().getCards().get(5).getYokaiCart().setX(9);
-		//	partieJeux.getCards().getCards().get(5).getYokaiCart().setY(9);
+			// partieJeux.getCards().getCards().get(5).getYokaiCart().setX(9);
+			// partieJeux.getCards().getCards().get(5).getYokaiCart().setY(9);
 			showCard(view, 5, btn);
 			card_index = 5;
 			break;
 		case "position0_06":
-			//partieJeux.getCards().getCards().get(6).getYokaiCart().setX(9);
-			//partieJeux.getCards().getCards().get(6).getYokaiCart().setY(10);
+			// partieJeux.getCards().getCards().get(6).getYokaiCart().setX(9);
+			// partieJeux.getCards().getCards().get(6).getYokaiCart().setY(10);
 			showCard(view, 6, btn);
 			card_index = 6;
 			break;
 		case "position0_07":
-		//	partieJeux.getCards().getCards().get(7).getYokaiCart().setX(9);
-		//	partieJeux.getCards().getCards().get(7).getYokaiCart().setY(11);
+			// partieJeux.getCards().getCards().get(7).getYokaiCart().setX(9);
+			// partieJeux.getCards().getCards().get(7).getYokaiCart().setY(11);
 			showCard(view, 7, btn);
 			card_index = 7;
 			break;
 		case "position0_08":
-		//	partieJeux.getCards().getCards().get(8).getYokaiCart().setX(10);
-		//	partieJeux.getCards().getCards().get(8).getYokaiCart().setY(8);
+			// partieJeux.getCards().getCards().get(8).getYokaiCart().setX(10);
+			// partieJeux.getCards().getCards().get(8).getYokaiCart().setY(8);
 			showCard(view, 8, btn);
 			card_index = 8;
 			break;
 		case "position0_09":
-		//	partieJeux.getCards().getCards().get(9).getYokaiCart().setX(10);
-		//	partieJeux.getCards().getCards().get(9).getYokaiCart().setY(9);
+			// partieJeux.getCards().getCards().get(9).getYokaiCart().setX(10);
+			// partieJeux.getCards().getCards().get(9).getYokaiCart().setY(9);
 			showCard(view, 9, btn);
 			card_index = 9;
 			break;
 		case "position0_010":
-		//	partieJeux.getCards().getCards().get(10).getYokaiCart().setX(10);
-		//	partieJeux.getCards().getCards().get(10).getYokaiCart().setY(10);
+			// partieJeux.getCards().getCards().get(10).getYokaiCart().setX(10);
+			// partieJeux.getCards().getCards().get(10).getYokaiCart().setY(10);
 			showCard(view, 10, btn);
 			card_index = 10;
 			break;
 		case "position0_011":
-		////	partieJeux.getCards().getCards().get(11).getYokaiCart().setX(10);
-		///	partieJeux.getCards().getCards().get(11).getYokaiCart().setY(11);
+			//// partieJeux.getCards().getCards().get(11).getYokaiCart().setX(10);
+			/// partieJeux.getCards().getCards().get(11).getYokaiCart().setY(11);
 			showCard(view, 11, btn);
 			card_index = 11;
 			break;
 		case "position0_012":
-		//	partieJeux.getCards().getCards().get(12).getYokaiCart().setX(11);
-		//	partieJeux.getCards().getCards().get(12).getYokaiCart().setY(8);
+			// partieJeux.getCards().getCards().get(12).getYokaiCart().setX(11);
+			// partieJeux.getCards().getCards().get(12).getYokaiCart().setY(8);
 			showCard(view, 12, btn);
 			card_index = 12;
 			break;
 		case "position0_013":
-		//	partieJeux.getCards().getCards().get(13).getYokaiCart().setX(11);
-		//	partieJeux.getCards().getCards().get(13).getYokaiCart().setY(9);
+			// partieJeux.getCards().getCards().get(13).getYokaiCart().setX(11);
+			// partieJeux.getCards().getCards().get(13).getYokaiCart().setY(9);
 			showCard(view, 13, btn);
 			card_index = 13;
 			break;
 
 		case "position0_014":
-		//	partieJeux.getCards().getCards().get(14).getYokaiCart().setX(11);
-			//partieJeux.getCards().getCards().get(14).getYokaiCart().setY(10);
+			// partieJeux.getCards().getCards().get(14).getYokaiCart().setX(11);
+			// partieJeux.getCards().getCards().get(14).getYokaiCart().setY(10);
 			showCard(view, 14, btn);
 			card_index = 14;
 			break;
 		case "position0_015":
-		//	partieJeux.getCards().getCards().get(15).getYokaiCart().setX(11);
-		//	partieJeux.getCards().getCards().get(15).getYokaiCart().setY(11);
+			// partieJeux.getCards().getCards().get(15).getYokaiCart().setX(11);
+			// partieJeux.getCards().getCards().get(15).getYokaiCart().setY(11);
 			showCard(view, 15, btn);
 
 			card_index = 15;
@@ -422,10 +433,10 @@ public class MyController implements Initializable {
 
 	public static int x = -1;
 	public static int y = -1;
-	 
 
 	public void moveCard(Pane pane) {
-
+		System.out.println(
+				"--------------------------------------move card fonction--------------------------------------");
 		Pane pane2 = new Pane();
 
 		boarad.getChildren().remove(pane);
@@ -434,8 +445,8 @@ public class MyController implements Initializable {
 		// get the actual position of the card to color her place after moving her
 		int idCarte = getbtnId(carteTomove);
 		System.out.println("moving " + carteTomove.getId() + " (" + idCarte + ") : ("
-				+ partieJeux.getCards().getCards().get(3).getCord().getX() + ","
-				+ partieJeux.getCards().getCards().get(3).getCord().getY() + ")");
+				+ partieJeux.getCards().getCards().get(idCarte).getCord().getX() + ","
+				+ partieJeux.getCards().getCards().get(idCarte).getCord().getY() + ")");
 
 		// search for the color of the case from board list :
 
@@ -445,14 +456,12 @@ public class MyController implements Initializable {
 		pane2.setStyle(casse.getStyle());
 		// add this event to the board place
 		pane2.setOnMousePressed(event -> pressed(event, pane2));
-		
-		
-        System.out.println("add panne to :" +partieJeux.getCards().getCards().get(idCarte).getCord().getX()+","+partieJeux.getCards().getCards().get(idCarte).getCord().getY());
-        
-        
+
+		System.out.println("add panne to :" + partieJeux.getCards().getCards().get(idCarte).getCord().getX() + ","
+				+ partieJeux.getCards().getCards().get(idCarte).getCord().getY());
+
 		// color the palce lefting
-        
-        
+
 		boarad.add(pane2, (int) partieJeux.getCards().getCards().get(idCarte).getCord().getY(),
 				(int) partieJeux.getCards().getCards().get(idCarte).getCord().getX());
 
@@ -465,71 +474,19 @@ public class MyController implements Initializable {
 		boarad.add(carteTomove, y, x);
 		System.out.println("carte have been moved to (" + x + "," + y + ")");
 		carteTomove = null;
-		x =  -1;
+		x = -1;
 		y = -1;
 		btn_dos_indice.setDisable(false);
-	}
 
-	public boolean possibleToMove(int x, int y) {
-
-		if ((getNodeByCoordinate(x, y + 1) || getNodeByCoordinate(x, y - 1) || getNodeByCoordinate(x + 1, y)
-				|| getNodeByCoordinate(x - 1, y)) && LaisserPasCarteIsolee()) {
-			System.out.println("case available to receive any card");
-			return true;
-		} else {
-			System.out.println("this case are not  available to receive any card");
-			return false;
-		}
-		 
-	}
-	
-	public boolean LaisserPasCarteIsolee() {
-		boarad.getChildren().remove(carteTomove);
-		int idCarte = getbtnId(carteTomove);
-		int xCard=partieJeux.getCards().getCards().get(idCarte).getCord().getX();
-		int yCard=partieJeux.getCards().getCards().get(idCarte).getCord().getY();
-		
-		System.out.println(boarad.getNodeOrientation().name());
-		
-		if (	
-					((getNodeByCoordinate(xCard+1, yCard))	&&	(
-				getNodeByCoordinate(xCard+2, yCard)||
-				getNodeByCoordinate(xCard+1, yCard+1)||
-				getNodeByCoordinate(xCard + 1, yCard-1)		)
-					)
-						||	
-				(	(getNodeByCoordinate(xCard, yCard+1)) &&	(
-				getNodeByCoordinate(xCard+1, yCard + 2)||
-				getNodeByCoordinate(xCard-1, yCard+1)    ||
-				getNodeByCoordinate(xCard + 1, yCard+1)	)
-					)
-						||
-				(	(getNodeByCoordinate(xCard-1, yCard)) &&	(
-				getNodeByCoordinate(xCard-2, yCard)||
-				getNodeByCoordinate(xCard-1, yCard-1)    ||
-				getNodeByCoordinate(xCard - 1, yCard+1)	)
-					)
-						||
-				(	(getNodeByCoordinate(xCard, yCard-1)) &&	(
-				getNodeByCoordinate(xCard, yCard-2)||
-				getNodeByCoordinate(xCard+1, yCard-1)    ||
-				getNodeByCoordinate(xCard - 1, yCard-1)	)
-					)
-				){
-			System.out.println("aucune carte est laissée isolée");
-			return true;
-		} else {
-			System.out.println("laaaaaaaaaaaaaaaaa");
-			boarad.getChildren().add(carteTomove);
-			System.out.println("faut pas laisser une carte seule!");
-			return false;
-		}
+		System.out.println(
+				"--------------------------------------fin move card fonction--------------------------------------");
 	}
 
 	boolean getNodeByCoordinate(Integer row, Integer column) {
 		for (Node node : boarad.getChildren()) {
 			if (boarad.getRowIndex(node) == row && boarad.getColumnIndex(node) == column) {
 				if (node instanceof Button) {
+					// System.out.println(node.getId());
 					return true;
 				}
 
@@ -537,6 +494,103 @@ public class MyController implements Initializable {
 		}
 		return false;
 	}
+
+	public boolean validerLeDeplacement(int x, int y) {
+		int  top=-1, down=-1, right=-1, left =-1;
+		 
+		if (getNodeByCoordinate(x, y + 1)) {
+			if ( possibleToMove(x, y + 1)) {
+				right = 1;
+			}else {
+				System.out.println("you can left cas right {" + x + "," + y+1 + "} alone");
+				right =0;
+			}
+		 
+
+		}
+		if (getNodeByCoordinate(x, y - 1)) {
+			if(possibleToMove(x, y - 1)) {
+				left =1;
+			}else {
+				System.out.println("you can left cas left  {" + x + "," + (y-1) + "} alone");
+				left =0;
+			}
+
+		 
+
+		}
+
+		if (getNodeByCoordinate(x + 1, y)) {
+			if (possibleToMove(x + 1, y)) {
+				top =1;
+			}else {
+				System.out.println("you can left cas top {" + (x+1)+ "," + y + "} alone");
+				top = 0;
+			}
+ 
+
+		}
+
+		if (getNodeByCoordinate(x - 1, y)) {
+			if( possibleToMove(x - 1, y)){
+				down = 1;
+			}else {
+				System.out.println("you can left case down {" + (x-1) + "," + y + "} alone");
+				down=0;
+			}
+ 
+
+			System.out.println("----------------------------- fin valider les deplacemet--------------- ");
+
+		}
+	   
+      if (top == 0  || down == 0 || right== 0 ||left== 0) {
+    	  return false;
+      }else {
+    	  return true;
+      }
+		
+
+	}
+
+	public boolean possibleToMove(int x, int y) {
+
+		if ((getNodeByCoordinate(x, y + 1) || getNodeByCoordinate(x, y - 1) || getNodeByCoordinate(x + 1, y)
+				|| getNodeByCoordinate(x - 1, y))) {
+			// System.out.println("case available to receive any card");
+			return true;
+		} else {
+			// System.out.println("this case are not available to receive any card");
+			return false;
+		}
+
+	}
+
+	/*
+	 * public boolean LaisserPasCarteIsolee() {
+	 * boarad.getChildren().remove(carteTomove); int idCarte =
+	 * getbtnId(carteTomove); int xCard =
+	 * partieJeux.getCards().getCards().get(idCarte).getCord().getX(); int yCard =
+	 * partieJeux.getCards().getCards().get(idCarte).getCord().getY();
+	 * 
+	 * System.out.println(boarad.getNodeOrientation().name());
+	 * 
+	 * if (((getNodeByCoordinate(xCard + 1, yCard)) && (getNodeByCoordinate(xCard +
+	 * 2, yCard) || getNodeByCoordinate(xCard + 1, yCard + 1) ||
+	 * getNodeByCoordinate(xCard + 1, yCard - 1))) || ((getNodeByCoordinate(xCard,
+	 * yCard + 1)) && (getNodeByCoordinate(xCard + 1, yCard + 2) ||
+	 * getNodeByCoordinate(xCard - 1, yCard + 1) || getNodeByCoordinate(xCard + 1,
+	 * yCard + 1))) || ((getNodeByCoordinate(xCard - 1, yCard)) &&
+	 * (getNodeByCoordinate(xCard - 2, yCard) || getNodeByCoordinate(xCard - 1,
+	 * yCard - 1) || getNodeByCoordinate(xCard - 1, yCard + 1))) ||
+	 * ((getNodeByCoordinate(xCard, yCard - 1)) && (getNodeByCoordinate(xCard, yCard
+	 * - 2) || getNodeByCoordinate(xCard + 1, yCard - 1) ||
+	 * getNodeByCoordinate(xCard - 1, yCard - 1)))) {
+	 * System.out.println("aucune carte est laissée isolée"); return true; } else {
+	 * System.out.println("laaaaaaaaaaaaaaaaa");
+	 * boarad.getChildren().add(carteTomove);
+	 * System.out.println("faut pas laisser une carte seule!"); return false; } }
+	 */
 
 	boolean boardPane(Integer row, Integer column) {
 		for (Node node : boarad.getChildren()) {
@@ -555,21 +609,45 @@ public class MyController implements Initializable {
 		boarad.getChildren().remove(carteTomove);
 		x = boarad.getRowIndex(node);
 		y = boarad.getColumnIndex(node);
-		System.out.println("move to (" + x + "," + y + ")");
+
 		// deplacer une carte
 		if (partieJeux.getEtape() == 2) {
-			
-			if (possibleToMove(x, y)==true) {
-				System.out.println("you clicked mee (" + x + "," + y + ")");
+			// if (possibleToMove(x, y) == true) ->verify the case that where are moving to
+			if (possibleToMove(x, y) == true  ) {
+
 				if (carteTomove != null) {
+					int idCarte = getbtnId(carteTomove);
+//	// verify the case that where leaving
+					if (validerLeDeplacement(partieJeux.getCards().getCards().get(idCarte).getCord().getX(),
+							partieJeux.getCards().getCards().get(idCarte).getCord().getY())) {
+								System.out.println("-------------------- pressed debut --------------");
+					// --------------------------------------------------------------------------------------------
+					
+				
+
+					System.out.println("carte to move " + getbtnId(carteTomove) + " :"
+							+ partieJeux.getCards().getCards().get(idCarte).getCord().getX() + ","
+							+ partieJeux.getCards().getCards().get(idCarte).getCord().getY() + " To : (" + x + "," + y
+							+ ") ");
+					 
+
+					// --------------------------------------------------------------------------------------------
 					moveCard((Pane) node);
 					partieJeux.NextStep();
 					carteTomove = null;
+						
+					}else {
+						boarad.getChildren().add(carteTomove);
+						System.out.println("please dont left alone ;( ");
+					}
+			
+					System.out.println("-------------------- fin pressed debut --------------");
 				} else {
+					
 					System.out.println("Oops no cart has been chosen");
 				}
 
-			}else {
+			} else {
 				boarad.getChildren().add(carteTomove);
 				System.out.println("case error");
 			}
@@ -597,7 +675,7 @@ public class MyController implements Initializable {
 	@FXML
 	void Use_cart_indice(ActionEvent event) {
 		// identifier quel est l'indice concerné par le click
-		System.out.println("----------" + carteIndiceDispo.getName());
+		// System.out.println("----------" + carteIndiceDispo.getName());
 	}
 
 	public void placerIndiceSurCarte(Button btn) {
@@ -607,10 +685,10 @@ public class MyController implements Initializable {
 		view.setFitWidth(90);
 		btn.setGraphic(view);
 		btn.setDisable(true);
-		if(sep1.isVisible()) {
+		if (sep1.isVisible()) {
 			sep1.setVisible(false);
 			sep2.setVisible(true);
-		}else {
+		} else {
 			sep1.setVisible(true);
 			sep2.setVisible(false);
 		}
@@ -620,7 +698,7 @@ public class MyController implements Initializable {
 		view2.setFitWidth(200);
 		btn_carte_indice_reveald.setGraphic(view2);
 		partieJeux.NextStep();
-		
+
 	}
-	
+
 }

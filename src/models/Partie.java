@@ -114,11 +114,11 @@ public final class Partie {
 		this.setEtape(this.getEtape()+1);
 		if (this.getEtape()  == 4) {
 			this.setEtape(1);
-			System.out.println("next player---------------------------" + getEtape());
+			//System.out.println("next player---------------------------" + getEtape());
 		
 		}
 			
-			System.out.println("next step --------" + getEtape());
+			//System.out.println("next step --------" + getEtape());
 			
 	}
 
