@@ -126,7 +126,7 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <Label layoutX="893.0" layoutY="67.0" prefHeight="17.0" prefWidth="57.0" text="20:00:00">
+      <Label fx:id="label_timer" layoutX="893.0" layoutY="67.0" prefHeight="17.0" prefWidth="57.0" text="20:00:00">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
