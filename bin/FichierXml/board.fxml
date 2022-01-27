@@ -3,8 +3,10 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Slider?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -16,7 +18,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1268.0" styleClass="backgroundBoard" stylesheets="@../application/application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.MyController">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1268.0" styleClass="backgroundBoard" stylesheets="@../application/application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.MyController">
    <children>
       <ScrollPane layoutX="20.0" layoutY="92.0" prefHeight="606.0" prefWidth="966.0">
          <opaqueInsets>
@@ -149,6 +151,18 @@
       <Pane layoutX="1144.0" layoutY="343.0" prefHeight="65.0" prefWidth="76.0">
          <children>
             <Button fx:id="btnDontUse" layoutY="-16.0" mnemonicParsing="false" onAction="#nePasUseCarteIndice" prefHeight="81.0" prefWidth="83.0" style="-fx-background-radius: 50 50 50 50;" styleClass="btn_skipe" stylesheets="@../application/application.css" />
+         </children>
+      </Pane>
+      <Pane layoutX="1013.0" layoutY="86.0" prefHeight="170.0" prefWidth="221.0">
+         <children>
+            <Button fx:id="btn_previous" layoutX="14.0" layoutY="85.0" mnemonicParsing="false" onAction="#previous" text="PREVIOUS" />
+            <Button fx:id="btn_play" layoutX="7.0" layoutY="55.0" mnemonicParsing="false" onAction="#playe" prefHeight="25.0" prefWidth="52.0" text="PLAy" />
+            <Button fx:id="btn_pause" layoutX="81.0" layoutY="55.0" mnemonicParsing="false" onAction="#pause" text="PAUSE" />
+            <Button fx:id="btn_reset" layoutX="146.0" layoutY="55.0" mnemonicParsing="false" onAction="#reset" text="RESET" />
+            <Button fx:id="bt_next" layoutX="124.0" layoutY="85.0" mnemonicParsing="false" onAction="#next" prefHeight="25.0" prefWidth="70.0" text="NEXT" />
+            <ProgressBar fx:id="progress" layoutX="11.0" layoutY="124.0" prefWidth="200.0" progress="0.0" />
+            <Label fx:id="label_music" layoutX="81.0" layoutY="14.0" text="Label" />
+            <Slider fx:id="volumSlider" layoutX="37.0" layoutY="142.0" onDragDetected="#volume" />
          </children>
       </Pane>
    </children>

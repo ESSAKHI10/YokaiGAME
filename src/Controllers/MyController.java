@@ -1,5 +1,6 @@
 package Controllers;
 
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.Timer;
@@ -7,6 +8,7 @@ import java.util.TimerTask;
 import java.util.concurrent.TimeUnit;
 
 import javafx.application.Platform;
+ 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -14,7 +16,9 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.control.Separator;
+import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -33,17 +37,36 @@ import models.Partie;
 import models.YokaiCardShowing;
 import models.BoardCase;
 import models.CarteIndice;
-
+import models.Music;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
 public class MyController implements Initializable {
+	@FXML
+	private Button btn_pause;
 
+	@FXML
+	private Button btn_play;
+
+	@FXML
+	private Button btn_previous;
+
+	@FXML
+	private Button btn_reset;
+	@FXML
+	private Button bt_next;
+	@FXML
+	private Label label_music;
+	@FXML
+	private Slider volumSlider;
 	@FXML
 	private Label labelNomrePLayer;
 	@FXML
 	private Button btn_nextPlayer;
 
 	@FXML
-    private Button btnDontUse;
-	
+	private Button btnDontUse;
+
 	@FXML
 	private TextField textFieldPLayerName;
 	@FXML
@@ -122,7 +145,8 @@ public class MyController implements Initializable {
 
 	@FXML
 	private Button ButtonExtendBottom;
-
+	@FXML
+	private ProgressBar progress;
 	@FXML
 	private Button ButtonExtendLeft;
 	@FXML
@@ -136,17 +160,18 @@ public class MyController implements Initializable {
 	@FXML
 	private Button btn_carte_indice_reveald;
 
+	private Music music;
+
 	/// counter to show only 2 picture
 	int counter = 2;
 
 	Partie partieJeux = Partie.getInstance();
 	public static Button carteTomove = null;
 	public static CarteIndice carteIndiceDispo;
- 
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		opneNEwWindows  = new openNewWindowa();
+		opneNEwWindows = new openNewWindowa();
 		Image img = new Image("/images/icons/badlion_100px.png");
 		Image img1 = new Image("/images/dos_indice.jpg");
 		cercel_player.setFill(new ImagePattern(img));
@@ -157,8 +182,7 @@ public class MyController implements Initializable {
 		// btn_dos_indice.setDisable(true);
 		partieJeux.getBoardYard().PreparBoard(boarad);
 		sep2.setVisible(false);
- 
- 
+
 		for (int i = 0; i < boarad.getColumnCount(); i++) {
 
 			for (int j = 0; j < boarad.getRowCount(); j++) {
@@ -169,8 +193,52 @@ public class MyController implements Initializable {
 
 		timerTask tm = new timerTask();
 		tm.setTimer(label_timer);
+		music = new Music(label_music);
+
+		music.playMedia(volumSlider, progress);
+	 
+
+		volumSlider.valueProperty().addListener(new ChangeListener<Number>() {
+
+			public void changed(ObservableValue<? extends Number> arg0, Number arg1, Number arg2) {
+
+				music.getMediaPlayer().setVolume(volumSlider.getValue() * 0.01);
+			}
+		});
 
 	}
+
+	@FXML
+	void next(ActionEvent event) {
+		music.nextMedia(label_music, volumSlider, progress);
+	}
+
+	@FXML
+	void pause(ActionEvent event) {
+		music.pauseMedia();
+	}
+
+	@FXML
+	void playe(ActionEvent event) {
+		music.playMedia(volumSlider, progress);
+	}
+
+	@FXML
+	void previous(ActionEvent event) {
+		music.previousMedia(label_music, volumSlider, progress);
+
+	}
+
+	@FXML
+	void reset(ActionEvent event) {
+		music.resetMedia(progress);
+	}
+
+	@FXML
+	void volume(MouseEvent event) {
+
+	}
+
 //winnig /losing party :
 
 	// cette méthode est appellée en cliquant sur une carte pour l'afficher
@@ -188,9 +256,7 @@ public class MyController implements Initializable {
 			// si le joueur regarde une carte on dicrémente le counter
 			// si le counter est égale à 0 cela veut dire que ke joueur a regardé les deux
 			// cartes
-			
-			
-			
+
 			if (counter != 0) {
 
 				Image img = new Image("images/dos_carte.jpg");
@@ -247,7 +313,7 @@ public class MyController implements Initializable {
 					"/images/yokaiImage/" + partieJeux.getCards().getCards().get(index).getYokaiCart() + ".jpg");
 			view.setImage(img);
 			btn.setGraphic(view);
-			//partieJeux.getCards().getCards().get(index).showm();
+			// partieJeux.getCards().getCards().get(index).showm();
 
 		} else {
 			System.out.println("sorry this card a deja un indice");
@@ -505,16 +571,17 @@ public class MyController implements Initializable {
 	}
 
 	@FXML
-    void nePasUseCarteIndice() {
-		if(sep1.isVisible()) {
+	void nePasUseCarteIndice() {
+		if (sep1.isVisible()) {
 			sep1.setVisible(false);
 			sep2.setVisible(true);
-		}else {
+		} else {
 			sep1.setVisible(true);
 			sep2.setVisible(false);
 		}
 		partieJeux.NextStep();
-    }
+	}
+
 	public boolean validerLeDeplacement(int x, int y) {
 		int top = -1, down = -1, right = -1, left = -1;
 
@@ -580,7 +647,6 @@ public class MyController implements Initializable {
 
 	}
 
- 
 	boolean boardPane(Integer row, Integer column) {
 		for (Node node : boarad.getChildren()) {
 			if (boarad.getRowIndex(node) == row && boarad.getColumnIndex(node) == column) {
@@ -657,17 +723,16 @@ public class MyController implements Initializable {
 		view.setFitHeight(125);
 		view.setFitWidth(125);
 		btn_carte_indice_reveald.setGraphic(view);
- 
+
 		if (!partieJeux.CartIndiceReveled()) {
 			opneNEwWindows = new openNewWindowa();
 			opneNEwWindows.open("/FichierXml/gameOver.fxml");
 			partieJeux.Score();
 		}
 		// btn_dos_indice.setDisable(true);
- 
-		
+
 		btn_dos_indice.setDisable(true);
- 
+
 	}
 
 	@FXML
@@ -689,9 +754,11 @@ public class MyController implements Initializable {
 		} else {
 			sep1.setVisible(true);
 			sep2.setVisible(false);
-		}int btnId= getbtnId(btn);
-		//String carteIndiceName=carteIndiceDispo.getName();
-		//String carteYokaiName=partieJeux.getCards().getCards().get(btnId).getYokaiCart().getName();
+		}
+		int btnId = getbtnId(btn);
+		// String carteIndiceName=carteIndiceDispo.getName();
+		// String
+		// carteYokaiName=partieJeux.getCards().getCards().get(btnId).getYokaiCart().getName();
 //		if((carteIndiceName=="indice_bleu" && carteYokaiName=="Oni")
 //				|| (carteIndiceName=="indice_vert" && carteYokaiName=="Kappa")
 //				|| (carteIndiceName=="indice_violet" && carteYokaiName=="Rokurokubi")
@@ -715,7 +782,8 @@ public class MyController implements Initializable {
 //			partieJeux.getTableScore().setScore(partieJeux.getTableScore().getScore()-1);
 //			System.out.println("-1 score = "+partieJeux.getTableScore().getScore());
 //		}
-		partieJeux.getCardsIndice().getCardindice().get(partieJeux.getCardsIndice().getCardindice().size() - 1).setUsed(true);
+		partieJeux.getCardsIndice().getCardindice().get(partieJeux.getCardsIndice().getCardindice().size() - 1)
+				.setUsed(true);
 		partieJeux.getCards().getCards().get(btnId).setHasIndice(true);
 		partieJeux.getCards().getCards().get(btnId).setCarteIndice(carteIndiceDispo);
 		Image img2 = new Image("/images/dos_indice.jpg");
@@ -725,7 +793,7 @@ public class MyController implements Initializable {
 		btn_carte_indice_reveald.setGraphic(view2);
 		partieJeux.NextStep();
 		if (!partieJeux.CartIndiceReveled()) {
-			
+
 			opneNEwWindows.open("/FichierXml/gameOver.fxml");
 			btn_dos_indice.setDisable(true);
 		}
@@ -733,4 +801,3 @@ public class MyController implements Initializable {
 	}
 
 }
-
