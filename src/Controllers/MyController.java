@@ -1,5 +1,6 @@
 package Controllers;
 
+import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.Timer;
@@ -24,6 +25,8 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import models.YokaiCart;
@@ -144,6 +147,11 @@ public class MyController implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		//music/song.mp3
+		File f = new File("src/music/song.mp3");
+        Media m = new Media(f.toURI().toString());
+        MediaPlayer mp = new MediaPlayer(m);
+        mp.play();
 		opneNEwWindows  = new openNewWindowa();
 		Image img = new Image("/images/icons/badlion_100px.png");
 		btnDontUse.setStyle("-fx-background-image: url('/images/icons/index.png')");
