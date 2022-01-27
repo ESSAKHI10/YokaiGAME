@@ -114,6 +114,8 @@ public class MyController implements Initializable {
 	private Circle cercel_player1;
 
 	@FXML
+	private Circle cercel_player11;
+	@FXML
 	private Button position0_09;
 	@FXML
 	private Button buttonExtendRowTop;
@@ -146,9 +148,10 @@ public class MyController implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		opneNEwWindows  = new openNewWindowa();
 		Image img = new Image("/images/icons/badlion_100px.png");
-		btnDontUse.setStyle("-fx-background-image: url('/images/icons/index.png')");
+		Image img1 = new Image("/images/dos_indice.jpg");
 		cercel_player.setFill(new ImagePattern(img));
 		cercel_player1.setFill(new ImagePattern(img));
+		cercel_player11.setFill(new ImagePattern(img1));
 		txtPlayer1.setText(partieJeux.getPlayers().get(0).getName());
 		txtPlayer2.setText(partieJeux.getPlayers().get(1).getName());
 		// btn_dos_indice.setDisable(true);

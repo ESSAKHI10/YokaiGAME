@@ -22,10 +22,18 @@
     -fx-background-position: center;
 	  
 }
+.btn_skipe{
+	-fx-background-image:url("/images/icons/next_page_100px.png");
+	-fx-background-size: 115.0px 115.0px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+	  
+}
+
 
 .btn_dos_indice{
 	-fx-background-image:url("/images/dos_indice.jpg");
-	-fx-background-size: 200.0px 200.0px;
+	-fx-background-size: 250.0px 250.0px;
     -fx-background-repeat: no-repeat;
     -fx-background-position: center;
 	  
